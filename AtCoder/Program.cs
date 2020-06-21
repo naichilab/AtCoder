@@ -16,7 +16,7 @@ namespace AtCoder
 
         public void Solve()
         {
-            var n = ReadLong();
+            var n = _inputReader.ReadLine().ToLong();
             var alphabets = "abcdefghijklmnopqrstuvwxyz";
             var result = "";
             while (n > 0)
@@ -31,15 +31,6 @@ namespace AtCoder
 
             _outputWriter.WriteLine(result);
         }
-
-        private string Read() => _inputReader.ReadLine();
-        private char[] ReadChars() => Array.ConvertAll(Read().Split(), a => a[0]);
-        private int ReadInt() => int.Parse(Read());
-        private long ReadLong() => long.Parse(Read());
-        private double ReadDouble() => double.Parse(Read());
-        private int[] ReadInts() => Array.ConvertAll(Read().Split(), int.Parse);
-        private long[] ReadLongs() => Array.ConvertAll(Read().Split(), long.Parse);
-        private double[] ReadDoubles() => Array.ConvertAll(Read().Split(), double.Parse);
     }
 
 
@@ -71,5 +62,12 @@ namespace AtCoder
     internal class ConsoleOutputWriter : IOutputWriter
     {
         public void WriteLine(string output) => Console.WriteLine(output);
+    }
+
+    public static class StringExtensions
+    {
+        public static char ToChar(this string text) => text[0];
+        public static long ToInt(this string text) => int.Parse(text);
+        public static long ToLong(this string text) => long.Parse(text);
     }
 }

@@ -17,5 +17,11 @@ namespace AtCoderTest
             new Solver(reader, writer).Solve();
             Assert.Equal(expectOutputs, writer.Outputs);
         }
+        
+        
+        
+        
+        
+        
     }
 }
