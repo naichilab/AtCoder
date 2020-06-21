@@ -7,10 +7,8 @@ namespace AtCoderTest
     public class UnitTest
     {
         [Theory]
-        [InlineData(new string[] {"A"}, new string[] {"A"})]
-        [InlineData(new string[] {"Z"}, new string[] {"A"})]
-        [InlineData(new string[] {"a"}, new string[] {"a"})]
-        [InlineData(new string[] {"z"}, new string[] {"a"})]
+        [InlineData(new string[] {"5 3", "50 100 80 120 80"}, new string[] {"210"})]
+        [InlineData(new string[] {"1 1", "1000"}, new string[] {"1000"})]
         public void Test(string[] inputs, string[] expectOutputs)
         {
             var reader = new TestInputReader(inputs);

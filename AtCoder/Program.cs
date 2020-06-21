@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace AtCoder
 {
@@ -45,25 +46,20 @@ namespace AtCoder
 
         public void Solve()
         {
-            var c = _inputReader.Read();
-            string alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            if (alphabets.Contains(c))
-            {
-                _outputWriter.Write("A");
-            }
-            else
-            {
-                _outputWriter.Write("a");
-            }
+            var line1 = ReadInts();
+            var line2 = ReadInts();
+            var K = line1[1];
+            var result = line2.OrderBy(n => n).Take(K).Sum();
+            _outputWriter.Write(result.ToString());
         }
 
-        private static string Read() => Console.ReadLine();
-        private static char[] ReadChars() => Array.ConvertAll(Read().Split(), a => a[0]);
-        private static int ReadInt() => int.Parse(Read());
-        private static long ReadLong() => long.Parse(Read());
-        private static double ReadDouble() => double.Parse(Read());
-        private static int[] ReadInts() => Array.ConvertAll(Read().Split(), int.Parse);
-        private static long[] ReadLongs() => Array.ConvertAll(Read().Split(), long.Parse);
-        private static double[] ReadDoubles() => Array.ConvertAll(Read().Split(), double.Parse);
+        private string Read() => _inputReader.Read();
+        private char[] ReadChars() => Array.ConvertAll(Read().Split(), a => a[0]);
+        private int ReadInt() => int.Parse(Read());
+        private long ReadLong() => long.Parse(Read());
+        private double ReadDouble() => double.Parse(Read());
+        private int[] ReadInts() => Array.ConvertAll(Read().Split(), int.Parse);
+        private long[] ReadLongs() => Array.ConvertAll(Read().Split(), long.Parse);
+        private double[] ReadDoubles() => Array.ConvertAll(Read().Split(), double.Parse);
     }
 }
