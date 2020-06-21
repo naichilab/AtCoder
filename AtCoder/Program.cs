@@ -46,11 +46,20 @@ namespace AtCoder
 
         public void Solve()
         {
-            var line1 = ReadInts();
-            var line2 = ReadInts();
-            var K = line1[1];
-            var result = line2.OrderBy(n => n).Take(K).Sum();
-            _outputWriter.Write(result.ToString());
+            var n = ReadLong();
+            var alphabets = "abcdefghijklmnopqrstuvwxyz";
+            var result = "";
+            while (n > 0)
+            {
+                n -= 1;
+                var a = (int) (n % 26);
+                n /= 26;
+
+                var c = alphabets[a];
+                result = c + result;
+            }
+
+            _outputWriter.Write(result);
         }
 
         private string Read() => _inputReader.Read();
