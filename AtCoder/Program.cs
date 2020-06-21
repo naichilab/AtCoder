@@ -3,36 +3,6 @@ using System.Linq;
 
 namespace AtCoder
 {
-    public interface IInputReader
-    {
-        string Read();
-    }
-
-    public interface IOutputWriter
-    {
-        void Write(string output);
-    }
-
-    class ConsoleInputReader : IInputReader
-    {
-        public string Read() => Console.ReadLine();
-    }
-
-    class ConsoleOutputWriter : IOutputWriter
-    {
-        public void Write(string output) => Console.WriteLine(output);
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var reader = new ConsoleInputReader();
-            var writer = new ConsoleOutputWriter();
-            new Solver(reader, writer).Solve();
-        }
-    }
-
     public class Solver
     {
         private readonly IInputReader _inputReader;
@@ -59,10 +29,10 @@ namespace AtCoder
                 result = c + result;
             }
 
-            _outputWriter.Write(result);
+            _outputWriter.WriteLine(result);
         }
 
-        private string Read() => _inputReader.Read();
+        private string Read() => _inputReader.ReadLine();
         private char[] ReadChars() => Array.ConvertAll(Read().Split(), a => a[0]);
         private int ReadInt() => int.Parse(Read());
         private long ReadLong() => long.Parse(Read());
@@ -70,5 +40,36 @@ namespace AtCoder
         private int[] ReadInts() => Array.ConvertAll(Read().Split(), int.Parse);
         private long[] ReadLongs() => Array.ConvertAll(Read().Split(), long.Parse);
         private double[] ReadDoubles() => Array.ConvertAll(Read().Split(), double.Parse);
+    }
+
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var reader = new ConsoleInputReader();
+            var writer = new ConsoleOutputWriter();
+            new Solver(reader, writer).Solve();
+        }
+    }
+
+    public interface IInputReader
+    {
+        string ReadLine();
+    }
+
+    public interface IOutputWriter
+    {
+        void WriteLine(string output);
+    }
+
+    internal class ConsoleInputReader : IInputReader
+    {
+        public string ReadLine() => Console.ReadLine();
+    }
+
+    internal class ConsoleOutputWriter : IOutputWriter
+    {
+        public void WriteLine(string output) => Console.WriteLine(output);
     }
 }
