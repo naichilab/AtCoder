@@ -21,17 +21,32 @@ namespace AtCoder
         {
             var numbers = _inputReader.ReadLine().ToIntArray().ToList();
             var n = numbers[0];
-            var l = numbers[1];
-            var words = new List<string>();
-            for (int i = 0; i < n; i++)
+            var k = numbers[1];
+            var dList = string.Join("", _inputReader.ReadLine().ToIntArray().Select(i => i.ToString()).ToArray());
+
+            var price = n;
+            while (true)
             {
-                var s = _inputReader.ReadLine();
-                words.Add(s);
+                var str = price.ToString();
+                var ng = false;
+                foreach (var c in str)
+                {
+                    if (dList.Contains(c))
+                    {
+                        ng = true;
+                        break;
+                    }
+                }
+                
+                if (!ng)
+                {
+                    break;
+                }
+
+                price++;
             }
 
-            var text = string.Join("", words.OrderBy(s => s).ToArray());
-
-            _outputWriter.WriteLine(text);
+            _outputWriter.WriteLine(price.ToString());
         }
     }
 

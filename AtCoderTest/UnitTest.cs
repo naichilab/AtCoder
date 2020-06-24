@@ -9,13 +9,19 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-3 3
-dxx
-axx
-cxx
+1000 8
+1 3 4 5 6 7 8 9
 ",
             @"
-axxcxxdxx
+2000
+")]
+        [InlineData(
+            @"
+9999 1
+0
+",
+            @"
+9999
 ")]
         public void Test(string inputLines, string expectOutputLines)
         {
