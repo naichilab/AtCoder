@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 
 namespace AtCoder
@@ -18,11 +20,18 @@ namespace AtCoder
         public void Solve()
         {
             var numbers = _inputReader.ReadLine().ToIntArray().ToList();
-            numbers.Sort();
+            var n = numbers[0];
+            var l = numbers[1];
+            var words = new List<string>();
+            for (int i = 0; i < n; i++)
+            {
+                var s = _inputReader.ReadLine();
+                words.Add(s);
+            }
 
-            var result = numbers[0] == 5 && numbers[1] == 5 && numbers[2] == 7;
+            var text = string.Join("", words.OrderBy(s => s).ToArray());
 
-            _outputWriter.WriteLine(result ? "YES" : "NO");
+            _outputWriter.WriteLine(text);
         }
     }
 
