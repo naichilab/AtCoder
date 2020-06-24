@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using AtCoder;
 
 namespace AtCoderTest
@@ -7,11 +8,19 @@ namespace AtCoderTest
     {
         private readonly Queue<string> _lines = new Queue<string>();
 
-        public TestInputReader(params string[] lines)
+        public TestInputReader(string lines)
         {
-            foreach (var line in lines)
+            using (var sr = new StringReader(lines))
             {
-                _lines.Enqueue(line);
+                while (sr.Peek() > -1)
+                {
+                    //一行読み込んで表示する
+                    var line = sr.ReadLine();
+                    if (!string.IsNullOrEmpty(line))
+                    {
+                        _lines.Enqueue(line);
+                    }
+                }
             }
         }
 

@@ -16,56 +16,33 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs = _inputReader.ReadLine().ToLongArray();
-            var A = inputs[0];
-            var B = inputs[1];
-            var syoji = inputs[2];
+            var N = _inputReader.ReadLine().ToInt();
+            var numbers = _inputReader.ReadLine().ToLongArray();
 
-            Func<long, long> nPrice = (n) => A * n + B * n.ToString().Length;
+            var oddCount = numbers.Count(n => n % 2 == 1);
+            var evenCount = numbers.Count(n => n % 2 == 0);
 
-            var success_max = 0L;
-            var failue_min = long.MaxValue;
-            var challenge = 1L;
             while (true)
             {
-                var price = nPrice(challenge);
-                var success = price <= syoji;
-                System.Diagnostics.Debug.Print(
-                    $"[{success_max}〜({challenge})〜{failue_min}], price {price}, shoji {syoji}, success={success}");
-
-                if (success)
+                if (oddCount >= 2)
                 {
-                    var diff = challenge - success_max;
-                    success_max = challenge;
-                    challenge += diff * 2;
-                    if (challenge >= failue_min)
-                    {
-                        challenge = failue_min - 1;
-                    }
-
-                    if (success_max >= 1000000000)
-                    {
-                        success_max = 1000000000;
-                        break;
-                    }
+                    oddCount -= 2;
+                    evenCount += 1;
+                }
+                else if (evenCount >= 2)
+                {
+                    evenCount -= 2;
+                    evenCount += 1;
                 }
                 else
-                {
-                    failue_min = challenge;
-                    challenge = (success_max + failue_min) / 2;
-                    if (challenge <= success_max)
-                    {
-                        challenge = success_max + 1;
-                    }
-                }
-
-                if (success_max + 1 == failue_min)
                 {
                     break;
                 }
             }
 
-            _outputWriter.WriteLine(success_max.ToString());
+            var result = (oddCount + evenCount) == 1;
+
+            _outputWriter.WriteLine(result ? "YES" : "NO");
         }
     }
 

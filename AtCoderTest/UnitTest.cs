@@ -8,23 +8,27 @@ namespace AtCoderTest
     {
         [Theory]
         [InlineData(
-            new[] {"10 7 100"},
-            new[] {"9"})]
+            @"
+3
+1 2 3
+",
+            @"
+YES
+")]
         [InlineData(
-            new[] {"2 1 100000000000"},
-            new[] {"1000000000"})]
-        [InlineData(
-            new[] {"1000000000 1000000000 100"},
-            new[] {"0"})]
-        [InlineData(
-            new[] {"1234 56789 314159265"},
-            new[] {"254309"})]
-        public void Test(string[] inputs, string[] expectOutputs)
+            @"
+5
+1 2 3 4 5
+",
+            @"
+NO
+")]
+        public void Test(string inputLines, string expectOutputLines)
         {
-            var reader = new TestInputReader(inputs);
+            var reader = new TestInputReader(inputLines);
             var writer = new TestOutputWriter();
             new Solver(reader, writer).Solve();
-            Assert.Equal(expectOutputs, writer.Outputs);
+            Assert.Equal(expectOutputLines, writer.OutputLines);
         }
     }
 }
