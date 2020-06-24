@@ -19,34 +19,32 @@ namespace AtCoder
 
         public void Solve()
         {
-            var numbers = _inputReader.ReadLine().ToIntArray().ToList();
-            var n = numbers[0];
-            var k = numbers[1];
-            var dList = string.Join("", _inputReader.ReadLine().ToIntArray().Select(i => i.ToString()).ToArray());
+            var numbers = _inputReader.ReadLine().ToIntArray();
+            var H = numbers[0];
+            var W = numbers[1];
+            var A = numbers[2];
+            var B = numbers[3];
 
-            var price = n;
-            while (true)
+            var h1 = H - A;
+            var w1 = B + 1;
+            var h2 = H;
+            var w2 = W - B;
+
+            var total = 0L;
+            for (int i = 0; i < h1; i++)
             {
-                var str = price.ToString();
-                var ng = false;
-                foreach (var c in str)
-                {
-                    if (dList.Contains(c))
-                    {
-                        ng = true;
-                        break;
-                    }
-                }
-                
-                if (!ng)
-                {
-                    break;
-                }
+                var tate1 = i;
+                var yoko1 = (w1 - 1);
+                var patternCount1 = Util.Combination(tate1 + yoko1, tate1);
 
-                price++;
+                var tate2 = h2 - 1 - i;
+                var yoko2 = w2 - 1;
+                var patternCount2 = Util.Combination(tate2 + yoko2, tate2);
+
+                total += (patternCount1 * patternCount2);
             }
 
-            _outputWriter.WriteLine(price.ToString());
+            _outputWriter.WriteLine(total.ToString());
         }
     }
 
@@ -88,5 +86,44 @@ namespace AtCoder
         public static int[] ToIntArray(this string text) => text.Split(' ').Select(txt => txt.ToInt()).ToArray();
         public static long ToLong(this string text) => long.Parse(text);
         public static long[] ToLongArray(this string text) => text.Split(' ').Select(txt => txt.ToLong()).ToArray();
+    }
+
+    public class Util
+    {
+        /// <summary>
+        /// 階乗
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static long Factional(long n)
+        {
+            if (n < 0) throw new ArgumentOutOfRangeException(nameof(n));
+
+            if (n == 0) return 1;
+            var result = 1;
+            for (var i = 1; i <= n; i++)
+            {
+                result = checked(result * i);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 組み合わせ
+        /// </summary>
+        /// <param name="m"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static long Combination(long m, long n)
+        {
+            if (m <= 0) throw new ArgumentOutOfRangeException(nameof(m));
+            if (n < 0) throw new ArgumentOutOfRangeException(nameof(n));
+            if (m < n) throw new ArgumentOutOfRangeException(nameof(n));
+
+            return Factional(m) / (Factional(n) * Factional(m - n));
+        }
     }
 }
