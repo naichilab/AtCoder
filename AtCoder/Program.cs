@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace AtCoder
@@ -16,31 +17,10 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-            var numbers = _inputReader.ReadLine().ToLongArray();
+            var numbers = _inputReader.ReadLine().ToIntArray().ToList();
+            numbers.Sort();
 
-            var oddCount = numbers.Count(n => n % 2 == 1);
-            var evenCount = numbers.Count(n => n % 2 == 0);
-
-            while (true)
-            {
-                if (oddCount >= 2)
-                {
-                    oddCount -= 2;
-                    evenCount += 1;
-                }
-                else if (evenCount >= 2)
-                {
-                    evenCount -= 2;
-                    evenCount += 1;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            var result = (oddCount + evenCount) == 1;
+            var result = numbers[0] == 5 && numbers[1] == 5 && numbers[2] == 7;
 
             _outputWriter.WriteLine(result ? "YES" : "NO");
         }
@@ -80,7 +60,8 @@ namespace AtCoder
     public static class StringExtensions
     {
         public static char ToChar(this string text) => text[0];
-        public static long ToInt(this string text) => int.Parse(text);
+        public static int ToInt(this string text) => int.Parse(text);
+        public static int[] ToIntArray(this string text) => text.Split(' ').Select(txt => txt.ToInt()).ToArray();
         public static long ToLong(this string text) => long.Parse(text);
         public static long[] ToLongArray(this string text) => text.Split(' ').Select(txt => txt.ToLong()).ToArray();
     }

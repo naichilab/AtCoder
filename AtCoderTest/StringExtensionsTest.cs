@@ -26,6 +26,13 @@ namespace AtCoderTest
         }
 
         [Theory]
+        [InlineData("1 2 3", new[] {1, 2, 3})]
+        public void TestStringToIntArray(string text, int[] expected)
+        {
+            Assert.Equal(expected, text.ToIntArray());
+        }
+
+        [Theory]
         [InlineData("-1", -1L)]
         [InlineData("0", 0)]
         [InlineData("1", 1L)]

@@ -9,16 +9,14 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-3
-1 2 3
+5 5 7
 ",
             @"
 YES
 ")]
         [InlineData(
             @"
-5
-1 2 3 4 5
+7 7 5
 ",
             @"
 NO
