@@ -88,6 +88,71 @@ namespace AtCoder
         public static long[] ToLongArray(this string text) => text.Split(' ').Select(txt => txt.ToLong()).ToArray();
     }
 
+    public struct ModLong : IEquatable<ModLong>
+    {
+        private const long Mod = 1000000007;
+        private readonly long _value;
+        public long Value => _value;
+
+        public ModLong(long value)
+        {
+            _value = value;
+        }
+
+
+        public bool Equals(ModLong other)
+        {
+            return _value == other._value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ModLong other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return _value.GetHashCode();
+        }
+
+        public static bool operator ==(ModLong left, ModLong right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ModLong left, ModLong right)
+        {
+            return !left.Equals(right);
+        }
+
+        public static ModLong operator +(ModLong left, ModLong right)
+        {
+            return new ModLong(((left._value % Mod) + (right._value % Mod)) % Mod);
+        }
+
+        public static ModLong operator -(ModLong left, ModLong right)
+        {
+            var result = new ModLong(((left._value % Mod) - (right._value % Mod)) % Mod);
+            if (result._value < 0) result = new ModLong(result._value + Mod);
+            return result;
+        }
+
+        public static ModLong operator *(ModLong left, ModLong right)
+        {
+            return new ModLong(((left._value % Mod) * (right._value % Mod)) % Mod);
+        }
+
+        public static explicit operator long(ModLong num)
+        {
+            return num._value;
+        }
+
+        public static explicit operator ModLong(long num)
+        {
+            return new ModLong(num);
+        }
+    }
+
     public class Util
     {
         /// <summary>
