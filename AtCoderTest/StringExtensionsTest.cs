@@ -35,5 +35,12 @@ namespace AtCoderTest
         {
             Assert.Equal(expected, text.ToLong());
         }
+
+        [Theory]
+        [InlineData("1 2 3", new[] {1L, 2L, 3L})]
+        public void TestStringToLongArray(string text, long[] expected)
+        {
+            Assert.Equal(expected, text.ToLongArray());
+        }
     }
 }
