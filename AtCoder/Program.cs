@@ -19,10 +19,25 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs = _inputReader.ReadLine().ToIntArray();
-            var a = inputs[0] * inputs[1];
-            var b = inputs[2] * inputs[3];
-            _outputWriter.WriteLine(a >= b ? a.ToString() : b.ToString());
+            var line1 = _inputReader.ReadLine().ToCharArray().ToList();
+            var line2 = _inputReader.ReadLine().ToCharArray().ToList();
+            var pass = "";
+            while (line1.Any() || line2.Any())
+            {
+                if (line1.Any())
+                {
+                    pass += line1[0];
+                    line1.RemoveAt(0);
+                }
+
+                if (line2.Any())
+                {
+                    pass += line2[0];
+                    line2.RemoveAt(0);
+                }
+            }
+
+            _outputWriter.WriteLine(pass);
         }
     }
 
