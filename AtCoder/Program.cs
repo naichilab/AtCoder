@@ -16,13 +16,9 @@ namespace AtCoder
 
         public void Solve()
         {
-            var numbers  = _inputReader.ReadLine().ToIntArray();
-            var A = numbers[0];
-            var B = numbers[1];
-
-            var result = A <= 8 && B <= 8;
-
-            _outputWriter.WriteLine(result ? "Yay!":":(");
+            var text = _inputReader.ReadLine().ToCharArray();
+            var result = text.GroupBy(c => c).All(grp => grp.Count() == 2);
+            _outputWriter.WriteLine(result ? "Yes" : "No");
         }
     }
 
