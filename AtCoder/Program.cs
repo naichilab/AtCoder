@@ -18,7 +18,8 @@ namespace AtCoder
         public void Solve()
         {
             var text = _inputReader.ReadLine().ToCharArray();
-            _outputWriter.WriteLine(text.Count(c => c == '1').ToString());
+            var result = text[0] == text[1] && text[0] == text[2];
+            _outputWriter.WriteLine(result ? "No" : "Yes");
         }
     }
 
