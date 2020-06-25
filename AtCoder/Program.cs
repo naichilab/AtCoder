@@ -18,15 +18,11 @@ namespace AtCoder
 
         public void Solve()
         {
-            var numbers = _inputReader.ReadLine().ToIntArray();
-            var N = numbers[0];
-            var M = numbers[1];
-
-            var c = new ModCombination();
-
-            var p1 = N >= 2 ? c.Combination(N, 2) : 0;
-            var p2 = M >= 2 ? c.Combination(M, 2) : 0;
-            _outputWriter.WriteLine((p1 + p2).ToString());
+            var a = _inputReader.ReadLine().ToInt();
+            var b = _inputReader.ReadLine().ToInt();
+            var h = _inputReader.ReadLine().ToInt();
+            var area = (a + b) * h / 2;
+            _outputWriter.WriteLine(area.ToString());
         }
     }
 
