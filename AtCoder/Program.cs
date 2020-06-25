@@ -16,25 +16,13 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-            var K = _inputReader.ReadLine().ToInt();
-            var X = _inputReader.ReadLine().ToInt();
-            var Y = _inputReader.ReadLine().ToInt();
+            var numbers  = _inputReader.ReadLine().ToIntArray();
+            var A = numbers[0];
+            var B = numbers[1];
 
-            var total = 0;
-            for (int i = 1; i <= N; i++)
-            {
-                if (i <= K)
-                {
-                    total += X;
-                }
-                else
-                {
-                    total += Y;
-                }
-            }
+            var result = A <= 8 && B <= 8;
 
-            _outputWriter.WriteLine(total.ToString());
+            _outputWriter.WriteLine(result ? "Yay!":":(");
         }
     }
 
