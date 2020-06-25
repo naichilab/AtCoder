@@ -18,11 +18,8 @@ namespace AtCoder
 
         public void Solve()
         {
-            var a = _inputReader.ReadLine().ToInt();
-            var b = _inputReader.ReadLine().ToInt();
-            var h = _inputReader.ReadLine().ToInt();
-            var area = (a + b) * h / 2;
-            _outputWriter.WriteLine(area.ToString());
+            var inputs = _inputReader.ReadLine().ToIntArray();
+            _outputWriter.WriteLine(inputs.Distinct().Count().ToString());
         }
     }
 
