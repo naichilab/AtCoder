@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AtCoder
@@ -16,9 +17,13 @@ namespace AtCoder
 
         public void Solve()
         {
-            var text = _inputReader.ReadLine().ToCharArray();
-            var result = text.GroupBy(c => c).All(grp => grp.Count() == 2);
-            _outputWriter.WriteLine(result ? "Yes" : "No");
+            List<int> times = new List<int>();
+            for (int i = 0; i < 8; i++)
+            {
+                times.Add(_inputReader.ReadLine().ToInt());
+            }
+
+            _outputWriter.WriteLine(times.Max(t => t).ToString());
         }
     }
 
