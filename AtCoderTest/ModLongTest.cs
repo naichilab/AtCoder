@@ -33,13 +33,6 @@ namespace AtCoderTest
         }
 
         [Fact]
-        public void 掛け算()
-        {
-            Assert.Equal((12345678L * 12345678L) % 1000000007,
-                (long) (new ModLong(12345678) * new ModLong(12345678)));
-        }
-
-        [Fact]
         public void 引き算()
         {
             Assert.Equal(999999993,
@@ -47,8 +40,26 @@ namespace AtCoderTest
         }
 
         [Fact]
-        public void TestAxBxC()
+        public void 掛け算()
         {
+            Assert.Equal((12345678L * 12345678L) % 1000000007,
+                (long) (new ModLong(12345678) * new ModLong(12345678)));
+        }
+
+        [Fact]
+        public void 割り算()
+        {
+            Assert.Equal(123456789,
+                (long) (new ModLong(678813585) / new ModLong(100000)));
+            
+            Assert.Equal(123456789,
+                (long) (new ModLong(12345678900000) / new ModLong(100000)));
+        }
+
+        [Fact]
+        public void Test計算()
+        {
+            
             // Assert.Equal(769682799, new ModLong(111111111) * 123456789 * 987654321));
         }
     }

@@ -142,6 +142,11 @@ namespace AtCoder
             return new ModLong(((left._value % Mod) * (right._value % Mod)) % Mod);
         }
 
+        public static ModLong operator /(ModLong left, ModLong right)
+        {
+            return new ModLong(((left._value % Mod) * Util.ModInv(right._value, Mod)) % Mod);
+        }
+
         public static explicit operator long(ModLong num)
         {
             return num._value;
@@ -155,6 +160,41 @@ namespace AtCoder
 
     public class Util
     {
+        /// <summary>
+        /// a^n mod を計算する
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="n"></param>
+        /// <param name="mod"></param>
+        /// <returns></returns>
+        public static long ModPow(long a, long n, long mod)
+        {
+            long res = 1;
+            while (n > 0)
+            {
+                if ((n & 1) == 1)
+                {
+                    res = res * a % mod;
+                }
+
+                a = a * a % mod;
+                n >>= 1;
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// a^{-1} mod を計算する
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="mod"></param>
+        /// <returns></returns>
+        public static long ModInv(long a, long mod)
+        {
+            return ModPow(a, mod - 2, mod);
+        }
+
         /// <summary>
         /// 階乗
         /// </summary>
