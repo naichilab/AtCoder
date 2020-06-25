@@ -18,8 +18,10 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs = _inputReader.ReadLine().ToIntArray();
-            _outputWriter.WriteLine(inputs.Distinct().Count().ToString());
+            var candies = _inputReader.ReadLine().ToIntArray().ToList();
+            candies.Sort();
+            var result = candies.Take(2).Sum() == candies.Last();
+            _outputWriter.WriteLine(result ? "Yes" : "No");
         }
     }
 
