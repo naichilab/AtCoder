@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 
 namespace AtCoder
@@ -18,10 +19,9 @@ namespace AtCoder
 
         public void Solve()
         {
-            var candies = _inputReader.ReadLine().ToIntArray().ToList();
-            candies.Sort();
-            var result = candies.Take(2).Sum() == candies.Last();
-            _outputWriter.WriteLine(result ? "Yes" : "No");
+            var inputs = _inputReader.ReadLine().ToStringArray();
+            var name = inputs.Select(txt => txt[0]).ToArray().ToJoinedString();
+            _outputWriter.WriteLine(name);
         }
     }
 
@@ -59,10 +59,13 @@ namespace AtCoder
     public static class StringExtensions
     {
         public static char ToChar(this string text) => text[0];
+        public static string[] ToStringArray(this string text) => text.Split(' ').ToArray();
         public static int ToInt(this string text) => int.Parse(text);
         public static int[] ToIntArray(this string text) => text.Split(' ').Select(txt => txt.ToInt()).ToArray();
         public static long ToLong(this string text) => long.Parse(text);
         public static long[] ToLongArray(this string text) => text.Split(' ').Select(txt => txt.ToLong()).ToArray();
+        public static string ToJoinedString(this string[] texts) => string.Join("", texts);
+        public static string ToJoinedString(this char[] chars) => string.Join("", chars);
     }
 
     public struct ModLong : IEquatable<ModLong>

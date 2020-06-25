@@ -1,3 +1,5 @@
+using System.IO;
+using System.Linq;
 using AtCoder;
 using Xunit;
 
@@ -13,6 +15,14 @@ namespace AtCoderTest
         {
             Assert.Equal(expected, text.ToChar());
         }
+
+        [Theory]
+        [InlineData("aa bb cc", new[] {"aa", "bb", "cc"})]
+        public void TestStringToStringArray(string text, string[] expected)
+        {
+            Assert.Equal(expected, text.ToStringArray());
+        }
+
 
         [Theory]
         [InlineData("-1", -1)]
@@ -49,5 +59,19 @@ namespace AtCoderTest
         {
             Assert.Equal(expected, text.ToLongArray());
         }
+
+        [Theory]
+        [InlineData(new[] {"a", "b", "c"}, "abc")]
+        public void TestStringArrayToJoinedString(string[] inputs, string expected)
+        {
+            Assert.Equal(expected, inputs.ToJoinedString());
+        }
+        [Theory]
+        [InlineData(new[] {'a','b','c'}, "abc")]
+        public void TestCharArrayToJoinedString(char[] inputs, string expected)
+        {
+            Assert.Equal(expected, inputs.ToJoinedString());
+        }
+
     }
 }
