@@ -17,13 +17,44 @@ namespace AtCoder
 
         public void Solve()
         {
-            List<int> times = new List<int>();
-            for (int i = 0; i < 8; i++)
+            var numbers = _inputReader.ReadLine().ToIntArray();
+            var X = numbers[0];
+            var Y = numbers[1];
+
+            var prise = 0;
+            if (X == 3)
             {
-                times.Add(_inputReader.ReadLine().ToInt());
+                prise += 100000;
+            }
+            else if (X == 2)
+            {
+                prise += 200000;
+            }
+            else if (X == 1)
+            {
+                prise += 300000;
             }
 
-            _outputWriter.WriteLine(times.Max(t => t).ToString());
+            if (Y == 3)
+            {
+                prise += 100000;
+            }
+            else if (Y == 2)
+            {
+                prise += 200000;
+            }
+            else if (Y == 1)
+            {
+                prise += 300000;
+            }
+
+            if (X == 1 && Y == 1)
+            {
+                prise += 400000;
+            }
+
+
+            _outputWriter.WriteLine(prise.ToString());
         }
     }
 
