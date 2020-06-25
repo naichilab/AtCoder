@@ -72,7 +72,6 @@ namespace AtCoder
     {
         private const long Mod = 1000000007;
         private readonly long _value;
-        public long Value => _value;
 
         public ModLong(long value)
         {
