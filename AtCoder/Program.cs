@@ -17,44 +17,8 @@ namespace AtCoder
 
         public void Solve()
         {
-            var numbers = _inputReader.ReadLine().ToIntArray();
-            var X = numbers[0];
-            var Y = numbers[1];
-
-            var prise = 0;
-            if (X == 3)
-            {
-                prise += 100000;
-            }
-            else if (X == 2)
-            {
-                prise += 200000;
-            }
-            else if (X == 1)
-            {
-                prise += 300000;
-            }
-
-            if (Y == 3)
-            {
-                prise += 100000;
-            }
-            else if (Y == 2)
-            {
-                prise += 200000;
-            }
-            else if (Y == 1)
-            {
-                prise += 300000;
-            }
-
-            if (X == 1 && Y == 1)
-            {
-                prise += 400000;
-            }
-
-
-            _outputWriter.WriteLine(prise.ToString());
+            var text = _inputReader.ReadLine().ToCharArray();
+            _outputWriter.WriteLine(text.Count(c => c == '1').ToString());
         }
     }
 
