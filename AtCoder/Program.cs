@@ -19,10 +19,12 @@ namespace AtCoder
 
         public void Solve()
         {
-            var c = _inputReader.ReadLine().ToChar();
-            var boin = new char[] {'a', 'i', 'u', 'e', 'o'};
-            var result = boin.Contains(c);
-            _outputWriter.WriteLine(result ? "vowel" : "consonant");
+            var inputs = _inputReader.ReadLine().ToStringArray();
+            var a = inputs[0].ToInt();
+            var b = inputs[2].ToInt();
+            var plus = inputs[1] == "+";
+
+            _outputWriter.WriteLine(plus ? (a + b).ToString() : (a - b).ToString());
         }
     }
 
