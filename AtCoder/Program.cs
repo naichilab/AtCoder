@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace AtCoder
@@ -17,9 +18,13 @@ namespace AtCoder
 
         public void Solve()
         {
-            var text = _inputReader.ReadLine().ToCharArray();
-            var result = text[0] == text[1] && text[0] == text[2];
-            _outputWriter.WriteLine(result ? "No" : "Yes");
+            var numbers = _inputReader.ReadLine().ToIntArray();
+            var N = numbers[0];
+            var M = numbers[1];
+
+            var p1 = N >= 2 ? Util.ModCombination(N, 2) : 0;
+            var p2 = M >= 2 ? Util.ModCombination(M, 2) : 0;
+            _outputWriter.WriteLine((p1 + p2).ToString());
         }
     }
 
@@ -195,11 +200,14 @@ namespace AtCoder
         /// <param name="n"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static long Combination(long m, long n)
+        public static long ModCombination(long m, long n)
         {
             if (m <= 0) throw new ArgumentOutOfRangeException(nameof(m));
             if (n < 0) throw new ArgumentOutOfRangeException(nameof(n));
             if (m < n) throw new ArgumentOutOfRangeException(nameof(n));
+
+            const int MAX = 510000;
+            long[] fac = new long[MAX];
 
             return Factional(m) / (Factional(n) * Factional(m - n));
         }

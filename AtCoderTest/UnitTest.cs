@@ -9,17 +9,38 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-BBA
+2 1
 ",
             @"
-Yes
+1
 ")]
         [InlineData(
             @"
-BBB
+4 3
 ",
             @"
-No
+9
+")]
+        [InlineData(
+            @"
+1 1
+",
+            @"
+0
+")]
+        [InlineData(
+            @"
+13 3
+",
+            @"
+81
+")]
+        [InlineData(
+            @"
+0 3
+",
+            @"
+3
 ")]
         public void Test(string inputLines, string expectOutputLines)
         {
