@@ -18,13 +18,13 @@ namespace AtCoder
         {
             var N = _inputReader.ReadLine().ToInt();
 
-            ModLong power = (ModLong) 1;
+            int count = 0;
             for (int i = 1; i <= N; i++)
             {
-                power *= (ModLong) i;
+                count += i;
             }
 
-            _outputWriter.WriteLine(power.ToString());
+            _outputWriter.WriteLine(count.ToString());
         }
     }
 
