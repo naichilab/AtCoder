@@ -16,32 +16,15 @@ namespace AtCoder
 
         public void Solve()
         {
-            var numbers = _inputReader.ReadLine().ToIntArray();
-            var H = numbers[0];
-            var W = numbers[1];
-            var A = numbers[2];
-            var B = numbers[3];
+            var N = _inputReader.ReadLine().ToInt();
 
-            var h1 = H - A;
-            var w1 = B + 1;
-            var h2 = H;
-            var w2 = W - B;
-
-            var total = 0L;
-            for (int i = 0; i < h1; i++)
+            ModLong power = (ModLong) 1;
+            for (int i = 1; i <= N; i++)
             {
-                var tate1 = i;
-                var yoko1 = (w1 - 1);
-                var patternCount1 = Util.Combination(tate1 + yoko1, tate1);
-
-                var tate2 = h2 - 1 - i;
-                var yoko2 = w2 - 1;
-                var patternCount2 = Util.Combination(tate2 + yoko2, tate2);
-
-                total += (patternCount1 * patternCount2);
+                power *= (ModLong) i;
             }
 
-            _outputWriter.WriteLine(total.ToString());
+            _outputWriter.WriteLine(power.ToString());
         }
     }
 
@@ -128,17 +111,17 @@ namespace AtCoder
 
         public static ModLong operator -(ModLong left, ModLong right)
         {
-            return (ModLong)(left._value - right._value);
+            return (ModLong) (left._value - right._value);
         }
 
         public static ModLong operator *(ModLong left, ModLong right)
         {
-            return (ModLong)(left._value * right._value);
+            return (ModLong) (left._value * right._value);
         }
 
         public static ModLong operator /(ModLong left, ModLong right)
         {
-            return (ModLong)(left._value * Util.ModInv(right._value, Mod));
+            return (ModLong) (left._value * Util.ModInv(right._value, Mod));
         }
 
         public static explicit operator long(ModLong num)

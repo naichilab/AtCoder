@@ -9,38 +9,31 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-2 3 1 1
+3
 ",
             @"
-2
+6
 ")]
         [InlineData(
             @"
-10 7 3 4
+10
 ",
             @"
-3570
+3628800
 ")]
         [InlineData(
             @"
-100000 100000 99999 99999
+100000
 ",
             @"
-1
-")]
-        [InlineData(
-            @"
-100000 100000 44444 55555
-",
-            @"
-738162020
+457992974
 ")]
         public void Test(string inputLines, string expectOutputLines)
         {
-            // var reader = new TestInputReader(inputLines);
-            // var writer = new TestOutputWriter();
-            // new Solver(reader, writer).Solve();
-            // Assert.Equal(expectOutputLines, writer.OutputLines);
+            var reader = new TestInputReader(inputLines);
+            var writer = new TestOutputWriter();
+            new Solver(reader, writer).Solve();
+            Assert.Equal(expectOutputLines, writer.OutputLines);
         }
     }
 }
