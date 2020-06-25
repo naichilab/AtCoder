@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
 
 namespace AtCoder
@@ -96,9 +93,8 @@ namespace AtCoder
 
         public ModLong(long value)
         {
-            _value = value;
+            _value = (value % Mod + Mod) % Mod;
         }
-
 
         public bool Equals(ModLong other)
         {
@@ -127,24 +123,22 @@ namespace AtCoder
 
         public static ModLong operator +(ModLong left, ModLong right)
         {
-            return new ModLong(((left._value % Mod) + (right._value % Mod)) % Mod);
+            return (ModLong) (left._value + right._value);
         }
 
         public static ModLong operator -(ModLong left, ModLong right)
         {
-            var result = new ModLong(((left._value % Mod) - (right._value % Mod)) % Mod);
-            if (result._value < 0) result = new ModLong(result._value + Mod);
-            return result;
+            return (ModLong)(left._value - right._value);
         }
 
         public static ModLong operator *(ModLong left, ModLong right)
         {
-            return new ModLong(((left._value % Mod) * (right._value % Mod)) % Mod);
+            return (ModLong)(left._value * right._value);
         }
 
         public static ModLong operator /(ModLong left, ModLong right)
         {
-            return new ModLong(((left._value % Mod) * Util.ModInv(right._value, Mod)) % Mod);
+            return (ModLong)(left._value * Util.ModInv(right._value, Mod));
         }
 
         public static explicit operator long(ModLong num)
@@ -156,6 +150,8 @@ namespace AtCoder
         {
             return new ModLong(num);
         }
+
+        public override string ToString() => _value.ToString();
     }
 
     public class Util
