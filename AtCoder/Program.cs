@@ -19,9 +19,10 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs = _inputReader.ReadLine();
-            var output = inputs.Replace(",", " ");
-            _outputWriter.WriteLine(output);
+            var inputs = _inputReader.ReadLine().ToIntArray();
+            var a = inputs[0] * inputs[1];
+            var b = inputs[2] * inputs[3];
+            _outputWriter.WriteLine(a >= b ? a.ToString() : b.ToString());
         }
     }
 
