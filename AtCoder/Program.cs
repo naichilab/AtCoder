@@ -22,8 +22,10 @@ namespace AtCoder
             var N = numbers[0];
             var M = numbers[1];
 
-            var p1 = N >= 2 ? Util.ModCombination(N, 2) : 0;
-            var p2 = M >= 2 ? Util.ModCombination(M, 2) : 0;
+            var c = new ModCombination();
+
+            var p1 = N >= 2 ? c.Combination(N, 2) : 0;
+            var p2 = M >= 2 ? c.Combination(M, 2) : 0;
             _outputWriter.WriteLine((p1 + p2).ToString());
         }
     }
@@ -136,6 +138,44 @@ namespace AtCoder
         public override string ToString() => _value.ToString();
     }
 
+    public class ModCombination
+    {
+        private const int Max = 510000;
+        private const long Mod = 1000000007;
+
+        private long[] fac = new long[Max];
+        private long[] finv = new long[Max];
+        private long[] inv = new long[Max];
+
+        public ModCombination()
+        {
+            fac[0] = 1;
+            fac[1] = 1;
+            finv[0] = 1;
+            finv[1] = 1;
+            inv[1] = 1;
+            for (var i = 2; i < Max; i++)
+            {
+                fac[i] = fac[i - 1] * i % Mod;
+                inv[i] = Mod - inv[Mod % i] * (Mod / i) % Mod;
+                finv[i] = finv[i - 1] * inv[i] % Mod;
+            }
+        }
+
+        /// <summary>
+        /// mCn 組み合わせ
+        /// </summary>
+        /// <param name="m"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public long Combination(long m, long n)
+        {
+            if (m < n) return 0;
+            if (m < 0 || n < 0) return 0;
+            return fac[m] * (finv[n] * finv[m - n] % Mod) % Mod;
+        }
+    }
+
     public class Util
     {
         /// <summary>
@@ -191,25 +231,6 @@ namespace AtCoder
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// 組み合わせ
-        /// </summary>
-        /// <param name="m"></param>
-        /// <param name="n"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static long ModCombination(long m, long n)
-        {
-            if (m <= 0) throw new ArgumentOutOfRangeException(nameof(m));
-            if (n < 0) throw new ArgumentOutOfRangeException(nameof(n));
-            if (m < n) throw new ArgumentOutOfRangeException(nameof(n));
-
-            const int MAX = 510000;
-            long[] fac = new long[MAX];
-
-            return Factional(m) / (Factional(n) * Factional(m - n));
         }
     }
 }
