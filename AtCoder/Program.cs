@@ -17,14 +17,24 @@ namespace AtCoder
         public void Solve()
         {
             var N = _inputReader.ReadLine().ToInt();
+            var K = _inputReader.ReadLine().ToInt();
+            var X = _inputReader.ReadLine().ToInt();
+            var Y = _inputReader.ReadLine().ToInt();
 
-            int count = 0;
+            var total = 0;
             for (int i = 1; i <= N; i++)
             {
-                count += i;
+                if (i <= K)
+                {
+                    total += X;
+                }
+                else
+                {
+                    total += Y;
+                }
             }
 
-            _outputWriter.WriteLine(count.ToString());
+            _outputWriter.WriteLine(total.ToString());
         }
     }
 
