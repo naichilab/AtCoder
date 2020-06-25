@@ -219,18 +219,16 @@ namespace AtCoder
         /// <param name="n"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static long Factional(long n)
+        public static long ModFactional(long n)
         {
             if (n < 0) throw new ArgumentOutOfRangeException(nameof(n));
-
-            if (n == 0) return 1;
-            var result = 1;
+            ModLong result = (ModLong) 1;
             for (var i = 1; i <= n; i++)
             {
-                result = checked(result * i);
+                result *= (ModLong) i;
             }
 
-            return result;
+            return (long) result;
         }
     }
 }
