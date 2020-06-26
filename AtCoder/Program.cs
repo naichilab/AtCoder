@@ -19,8 +19,31 @@ namespace AtCoder
 
         public void Solve()
         {
-            var nums = _inputReader.ReadLine().ToIntArray();
-            var result = nums[2] >= nums[0] && nums[2] <= nums[1];
+            var nums = _inputReader.ReadLine().ToIntArray().Select(n =>
+            {
+                switch (n)
+                {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        return 1;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        return 2;
+                    case 2:
+                        return 3;
+                }
+
+                throw new Exception();
+            }).GroupBy(n => n);
+
+            var result = nums.Count() == 1;
             _outputWriter.WriteLine(result ? "Yes" : "No");
         }
     }
