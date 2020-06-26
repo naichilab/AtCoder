@@ -19,23 +19,8 @@ namespace AtCoder
 
         public void Solve()
         {
-            var n = _inputReader.ReadLine().ToLong();
-
-            var arr = new long[n];
-            for (long i = 0; i < n; i++)
-            {
-                arr[i] = i;
-            }
-
-            arr[0] = n;
-
-            long sum = 0;
-            for (long i = 1; i <= n; i++)
-            {
-                sum += (arr[i - 1] % i);
-            }
-
-            _outputWriter.WriteLine(sum.ToString());
+            var score = _inputReader.ReadLine().ToInt();
+            _outputWriter.WriteLine(score < 1200 ? "ABC" : "ARC");
         }
     }
 
