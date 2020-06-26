@@ -19,10 +19,8 @@ namespace AtCoder
 
         public void Solve()
         {
-            var cards = _inputReader.ReadLine().ToIntArray();
-            if (cards[0] == 1) cards[0] += 100;
-            if (cards[1] == 1) cards[1] += 100;
-            _outputWriter.WriteLine(cards[0] == cards[1] ? "Draw" : (cards[0] > cards[1] ? "Alice" : "Bob"));
+            var N = _inputReader.ReadLine().ToInt();
+            _outputWriter.WriteLine((N * 800 - (N / 15) * 200).ToString());
         }
     }
 
