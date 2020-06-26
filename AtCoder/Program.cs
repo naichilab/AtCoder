@@ -19,9 +19,31 @@ namespace AtCoder
 
         public void Solve()
         {
-            var num = _inputReader.ReadLine().ToStringArray().ToJoinedString().ToInt();
-            var result = num % 4 == 0;
-            _outputWriter.WriteLine(result.ToYESNO());
+            _inputReader.ReadLine();
+            var nums = _inputReader.ReadLine().ToLongArray().ToList();
+            nums.Sort();
+            var result = 1L;
+            for (int i = 0; i < nums.Count; i++)
+            {
+                try
+                {
+                    result = checked(result * nums[i]);
+                }
+                catch (Exception exception)
+                {
+                    result = -1;
+                    break;
+                }
+            }
+
+            if (result > 1000000000000000000)
+            {
+                _outputWriter.WriteLine("-1");
+            }
+            else
+            {
+                _outputWriter.WriteLine(result.ToString());
+            }
         }
     }
 
