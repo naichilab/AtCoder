@@ -19,12 +19,8 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs = _inputReader.ReadLine().ToStringArray().Select(c => c == "H").ToList();
-            // true true -> true
-            // true false -> false
-            // false true -> false
-            // false false -> true
-            _outputWriter.WriteLine(inputs[0] == inputs[1] ? "H" : "D");
+            var inputs = _inputReader.ReadLine().ToIntArray();
+            _outputWriter.WriteLine(((inputs[0] + inputs[1]) % 24).ToString());
         }
     }
 
