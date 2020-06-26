@@ -19,8 +19,12 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs = _inputReader.ReadLine().ToIntArray();
-            _outputWriter.WriteLine((inputs[1] - inputs[0]) == (inputs[2] - inputs[1]) ? "YES" : "NO");
+            var word = _inputReader.ReadLine()
+                .ToStringArray()
+                .Select(w => w.Substring(0, 1).ToUpper())
+                .ToArray()
+                .ToJoinedString();
+            _outputWriter.WriteLine(word);
         }
     }
 
