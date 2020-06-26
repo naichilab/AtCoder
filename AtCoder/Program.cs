@@ -19,8 +19,12 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-            _outputWriter.WriteLine((N * 800 - (N / 15) * 200).ToString());
+            var inputs = _inputReader.ReadLine().ToStringArray().Select(c => c == "H").ToList();
+            // true true -> true
+            // true false -> false
+            // false true -> false
+            // false false -> true
+            _outputWriter.WriteLine(inputs[0] == inputs[1] ? "H" : "D");
         }
     }
 
