@@ -9,24 +9,24 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-H H
+2 4 6
 ",
             @"
-H
+YES
 ")]
         [InlineData(
             @"
-D H
+2 5 6
 ",
             @"
-D
+NO
 ")]
         [InlineData(
             @"
-D D
+3 2 1
 ",
             @"
-H
+YES
 ")]
         public void Test(string inputLines, string expectOutputLines)
         {
