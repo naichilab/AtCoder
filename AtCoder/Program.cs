@@ -19,9 +19,9 @@ namespace AtCoder
 
         public void Solve()
         {
-            var nums = _inputReader.ReadLine().ToIntArray();
-            var result = (nums[0] + nums[1] >= 10) ? "error" : (nums[0] + nums[1]).ToString();
-            _outputWriter.WriteLine(result); //? "Yes" : "No");
+            var num = _inputReader.ReadLine().ToStringArray().ToJoinedString().ToInt();
+            var result = num % 4 == 0;
+            _outputWriter.WriteLine(result.ToYESNO());
         }
     }
 
@@ -66,6 +66,8 @@ namespace AtCoder
         public static long[] ToLongArray(this string text) => text.Split(' ').Select(txt => txt.ToLong()).ToArray();
         public static string ToJoinedString(this string[] texts) => string.Join("", texts);
         public static string ToJoinedString(this char[] chars) => string.Join("", chars);
+        public static string ToYESNO(this bool b) => b ? "YES" : "NO";
+        public static string ToYesNo(this bool b) => b ? "Yes" : "No";
     }
 
     public struct ModLong : IEquatable<ModLong>
