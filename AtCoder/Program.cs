@@ -19,10 +19,9 @@ namespace AtCoder
 
         public void Solve()
         {
-            var words = _inputReader.ReadLine()
-                .ToStringArray();
-            var result = (words[0].Last() == words[1].First()) && (words[1].Last() == words[2].First());
-            _outputWriter.WriteLine(result ? "YES" : "NO");
+            var nums = _inputReader.ReadLine().ToIntArray();
+            var result = nums[2] >= nums[0] && nums[2] <= nums[1];
+            _outputWriter.WriteLine(result ? "Yes" : "No");
         }
     }
 
