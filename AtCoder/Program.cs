@@ -19,31 +19,27 @@ namespace AtCoder
 
         public void Solve()
         {
-            _inputReader.ReadLine();
-            var nums = _inputReader.ReadLine().ToLongArray().ToList();
-            nums.Sort();
-            var result = 1L;
-            for (int i = 0; i < nums.Count; i++)
+            var N = _inputReader.ReadLine().ToInt();
+            var dict = new Dictionary<int, int>();
+            for (int i = 1; i <= N; i++)
             {
-                try
-                {
-                    result = checked(result * nums[i]);
-                }
-                catch (Exception exception)
-                {
-                    result = -1;
-                    break;
-                }
+                dict.Add(i, _inputReader.ReadLine().ToInt());
             }
 
-            if (result > 1000000000000000000)
+            var current = 1;
+            var pushed = new HashSet<int>();
+
+            while (true)
             {
-                _outputWriter.WriteLine("-1");
+                if (pushed.Contains(current)) break;
+                if (current == 2) break;
+
+                var next = dict[current];
+                pushed.Add(current);
+                current = next;
             }
-            else
-            {
-                _outputWriter.WriteLine(result.ToString());
-            }
+
+            _outputWriter.WriteLine(current == 2 ? pushed.Count.ToString() : "-1");
         }
     }
 
