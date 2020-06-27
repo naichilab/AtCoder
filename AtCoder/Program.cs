@@ -20,23 +20,20 @@ namespace AtCoder
 
         public void Solve()
         {
-            var nums = _inputReader.ReadLine().ToIntArray();
+            var N = _inputReader.ReadLine().ToInt();
+            var Xs = _inputReader.ReadLine().ToIntArray();
 
-            var A = nums[0];
-            var B = nums[1];
-
-            var o = 1;
-            var used = 0;
-            while (true)
+            var max = int.MaxValue;
+            for (int p = 1; p <= 100; p++)
             {
-                if (o >= B) break;
-
-                o--;
-                used++;
-                o += A;
+                var hp = Xs.Select(x => (x - p) * (x - p)).Sum();
+                if (hp < max)
+                {
+                    max = hp;
+                }
             }
 
-            _outputWriter.WriteLine(used.ToString());
+            _outputWriter.WriteLine(max.ToString());
         }
     }
 
