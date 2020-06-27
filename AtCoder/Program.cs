@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Linq;
 
 namespace AtCoder
@@ -21,19 +17,7 @@ namespace AtCoder
         public void Solve()
         {
             var N = _inputReader.ReadLine().ToInt();
-            var Xs = _inputReader.ReadLine().ToIntArray();
-
-            var max = int.MaxValue;
-            for (int p = 1; p <= 100; p++)
-            {
-                var hp = Xs.Select(x => (x - p) * (x - p)).Sum();
-                if (hp < max)
-                {
-                    max = hp;
-                }
-            }
-
-            _outputWriter.WriteLine(max.ToString());
+            _outputWriter.WriteLine((N + N * N + N * N * N).ToString());
         }
     }
 
