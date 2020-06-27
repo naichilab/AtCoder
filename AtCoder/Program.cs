@@ -3,83 +3,78 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Schema;
- 
+
 namespace AtCoder
 {
     public class Solver
     {
         private readonly IInputReader _inputReader;
         private readonly IOutputWriter _outputWriter;
- 
+
         public Solver(IInputReader inputReader, IOutputWriter outputWriter)
         {
             _inputReader = inputReader;
             _outputWriter = outputWriter;
         }
- 
+
         public void Solve()
         {
             var numbers = _inputReader.ReadLine().ToLongArray();
             var N = numbers[0];
             var M = numbers[1];
             var K = numbers[2];
-            var As = new List<long>();
-            As.Add(0);
-            var Bs = new List<long>();
-            Bs.Add(0);
-            As.AddRange(_inputReader.ReadLine().ToLongArray());
-            Bs.AddRange(_inputReader.ReadLine().ToLongArray());
- 
-            var aReaded = -1;
-            var aTotalTime = 0L;
-            var bReaded = -1;
-            var bTotalTime = 0L;
- 
-            //aできるだけ買う
-            foreach (var a in As)
+            var As = _inputReader.ReadLine().ToLongArray();
+            var Bs = _inputReader.ReadLine().ToLongArray();
+
+            var aTotalTimes = new List<long>();
+            var bTotalTimes = new List<long>();
+            aTotalTimes.Add(0);
+            bTotalTimes.Add(0);
+
+            for (int i = 0; i < As.Length; i++)
             {
-                if (aTotalTime + a <= K)
+                aTotalTimes.Add(aTotalTimes[i] + As[i]);
+            }
+
+            for (int i = 0; i < Bs.Length; i++)
+            {
+                bTotalTimes.Add(bTotalTimes[i] + Bs[i]);
+            }
+
+            var aReaded = 0;
+            var bReaded = 0;
+
+            //A->Bできるだけ買う
+            for (int i = 0; i < aTotalTimes.Count; i++)
+            {
+                if (aTotalTimes[i] <= K)
                 {
-                    aReaded++;
-                    aTotalTime += a;
-                }
-                else
-                {
-                    break;
+                    aReaded = i;
                 }
             }
- 
-            //bできるだけ買う
-            foreach (var b in Bs)
+
+            for (int i = 0; i < bTotalTimes.Count; i++)
             {
-                if (aTotalTime + bTotalTime + b <= K)
+                if (aTotalTimes[aReaded] + bTotalTimes[i] <= K)
                 {
-                    bReaded++;
-                    bTotalTime += b;
-                }
-                else
-                {
-                    break;
+                    bReaded = i;
                 }
             }
- 
+
             var maxReaded = aReaded + bReaded;
- 
+
             //aを減らしながらbを増やしてみる
             while (true)
             {
                 if (aReaded == 0) break;
- 
-                aTotalTime -= As[aReaded];
                 aReaded--;
- 
+
                 while (true)
                 {
-                    if (bReaded == Bs.Count - 1) break;
- 
-                    if (aTotalTime + bTotalTime + Bs[bReaded + 1] <= K)
+                    if (bReaded == bTotalTimes.Count - 1) break;
+
+                    if (aTotalTimes[aReaded] + bTotalTimes[bReaded + 1] <= K)
                     {
-                        bTotalTime += Bs[bReaded + 1];
                         bReaded++;
                     }
                     else
@@ -87,19 +82,19 @@ namespace AtCoder
                         break;
                     }
                 }
- 
+
                 if (maxReaded < aReaded + bReaded)
                 {
                     maxReaded = aReaded + bReaded;
                 }
             }
- 
- 
+
+
             _outputWriter.WriteLine(maxReaded.ToString());
         }
     }
- 
- 
+
+
     internal class Program
     {
         static void Main(string[] args)
@@ -109,27 +104,27 @@ namespace AtCoder
             new Solver(reader, writer).Solve();
         }
     }
- 
+
     public interface IInputReader
     {
         string ReadLine();
     }
- 
+
     public interface IOutputWriter
     {
         void WriteLine(string output);
     }
- 
+
     internal class ConsoleInputReader : IInputReader
     {
         public string ReadLine() => Console.ReadLine();
     }
- 
+
     internal class ConsoleOutputWriter : IOutputWriter
     {
         public void WriteLine(string output) => Console.WriteLine(output);
     }
- 
+
     public static class StringExtensions
     {
         public static char ToChar(this string text) => text[0];
@@ -138,92 +133,92 @@ namespace AtCoder
         public static int[] ToIntArray(this string text) => text.Split(' ').Select(txt => txt.ToInt()).ToArray();
         public static long ToLong(this string text) => long.Parse(text);
         public static long[] ToLongArray(this string text) => text.Split(' ').Select(txt => txt.ToLong()).ToArray();
- 
+
         public static string ToJoinedString(this string[] texts, string separator = "") =>
             string.Join(separator, texts);
- 
+
         public static string ToJoinedString(this char[] chars) => string.Join("", chars);
         public static string ToYESNO(this bool b) => b ? "YES" : "NO";
         public static string ToYesNo(this bool b) => b ? "Yes" : "No";
     }
- 
+
     public struct ModLong : IEquatable<ModLong>
     {
         private const long Mod = 1000000007;
         private readonly long _value;
- 
+
         public ModLong(long value)
         {
             _value = (value % Mod + Mod) % Mod;
         }
- 
+
         public bool Equals(ModLong other)
         {
             return _value == other._value;
         }
- 
+
         public override bool Equals(object obj)
         {
             return obj is ModLong other && Equals(other);
         }
- 
+
         public override int GetHashCode()
         {
             return _value.GetHashCode();
         }
- 
+
         public static bool operator ==(ModLong left, ModLong right)
         {
             return left.Equals(right);
         }
- 
+
         public static bool operator !=(ModLong left, ModLong right)
         {
             return !left.Equals(right);
         }
- 
+
         public static ModLong operator +(ModLong left, ModLong right)
         {
             return (ModLong) (left._value + right._value);
         }
- 
+
         public static ModLong operator -(ModLong left, ModLong right)
         {
             return (ModLong) (left._value - right._value);
         }
- 
+
         public static ModLong operator *(ModLong left, ModLong right)
         {
             return (ModLong) (left._value * right._value);
         }
- 
+
         public static ModLong operator /(ModLong left, ModLong right)
         {
             return (ModLong) (left._value * Util.ModInv(right._value, Mod));
         }
- 
+
         public static explicit operator long(ModLong num)
         {
             return num._value;
         }
- 
+
         public static explicit operator ModLong(long num)
         {
             return new ModLong(num);
         }
- 
+
         public override string ToString() => _value.ToString();
     }
- 
+
     public class ModCombination
     {
         private const int Max = 510000;
         private const long Mod = 1000000007;
- 
+
         private long[] fac = new long[Max];
         private long[] finv = new long[Max];
         private long[] inv = new long[Max];
- 
+
         public ModCombination()
         {
             fac[0] = 1;
@@ -238,7 +233,7 @@ namespace AtCoder
                 finv[i] = finv[i - 1] * inv[i] % Mod;
             }
         }
- 
+
         /// <summary>
         /// mCn 組み合わせ
         /// </summary>
@@ -252,7 +247,7 @@ namespace AtCoder
             return fac[m] * (finv[n] * finv[m - n] % Mod) % Mod;
         }
     }
- 
+
     public class Util
     {
         /// <summary>
@@ -271,14 +266,14 @@ namespace AtCoder
                 {
                     res = res * a % mod;
                 }
- 
+
                 a = a * a % mod;
                 n >>= 1;
             }
- 
+
             return res;
         }
- 
+
         /// <summary>
         /// a^{-1} mod を計算する
         /// </summary>
@@ -289,7 +284,7 @@ namespace AtCoder
         {
             return ModPow(a, mod - 2, mod);
         }
- 
+
         /// <summary>
         /// 階乗
         /// </summary>
@@ -304,7 +299,7 @@ namespace AtCoder
             {
                 result *= (ModLong) i;
             }
- 
+
             return (long) result;
         }
     }
