@@ -9,24 +9,30 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-4
+3 4 240
+60 90 120
+80 150 80 150
 ",
             @"
-23
+3
 ")]
         [InlineData(
             @"
-100
+3 4 730
+60 90 120
+80 150 80 150
 ",
             @"
-26879
+7
 ")]
         [InlineData(
             @"
-10000000
+5 4 1
+1000000000 1000000000 1000000000 1000000000 1000000000
+1000000000 1000000000 1000000000 1000000000
 ",
             @"
-838627288460105
+0
 ")]
         public void Test(string inputLines, string expectOutputLines)
         {

@@ -2,63 +2,104 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using System.Xml.Schema;
+ 
 namespace AtCoder
 {
     public class Solver
     {
         private readonly IInputReader _inputReader;
         private readonly IOutputWriter _outputWriter;
-
+ 
         public Solver(IInputReader inputReader, IOutputWriter outputWriter)
         {
             _inputReader = inputReader;
             _outputWriter = outputWriter;
         }
-
+ 
         public void Solve()
         {
             var numbers = _inputReader.ReadLine().ToLongArray();
-            _outputWriter.WriteLine((readedA + readedB).ToString());
-        }
-
-
-        private Dictionary<long, long> fDict = new Dictionary<long, long>();
-
-        public void initF()
-        {
-            for (int i = 1; i <= 10000000; i++)
+            var N = numbers[0];
+            var M = numbers[1];
+            var K = numbers[2];
+            var As = new List<long>();
+            As.Add(0);
+            var Bs = new List<long>();
+            Bs.Add(0);
+            As.AddRange(_inputReader.ReadLine().ToLongArray());
+            Bs.AddRange(_inputReader.ReadLine().ToLongArray());
+ 
+            var aReaded = -1;
+            var aTotalTime = 0L;
+            var bReaded = -1;
+            var bTotalTime = 0L;
+ 
+            //aできるだけ買う
+            foreach (var a in As)
             {
-            }
-        }
-
-        public static IEnumerable<int> PrimeFactors(int n)
-        {
-            int i = 2;
-            int tmp = n;
-
-            while (i * i <= n) //※1
-            {
-                if (tmp % i == 0)
+                if (aTotalTime + a <= K)
                 {
-                    tmp /= i;
-                    yield return i;
+                    aReaded++;
+                    aTotalTime += a;
                 }
                 else
                 {
-                    i++;
+                    break;
                 }
             }
-
-            if (tmp != 1) yield return tmp; //最後の素数も返す
-        }
-
-        public void f(long x)
-        {
+ 
+            //bできるだけ買う
+            foreach (var b in Bs)
+            {
+                if (aTotalTime + bTotalTime + b <= K)
+                {
+                    bReaded++;
+                    bTotalTime += b;
+                }
+                else
+                {
+                    break;
+                }
+            }
+ 
+            var maxReaded = aReaded + bReaded;
+ 
+            //aを減らしながらbを増やしてみる
+            while (true)
+            {
+                if (aReaded == 0) break;
+ 
+                aTotalTime -= As[aReaded];
+                aReaded--;
+ 
+                while (true)
+                {
+                    if (bReaded == Bs.Count - 1) break;
+ 
+                    if (aTotalTime + bTotalTime + Bs[bReaded + 1] <= K)
+                    {
+                        bTotalTime += Bs[bReaded + 1];
+                        bReaded++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+ 
+                if (maxReaded < aReaded + bReaded)
+                {
+                    maxReaded = aReaded + bReaded;
+                }
+            }
+ 
+ 
+            _outputWriter.WriteLine(maxReaded.ToString());
         }
     }
-
-
+ 
+ 
     internal class Program
     {
         static void Main(string[] args)
@@ -68,27 +109,27 @@ namespace AtCoder
             new Solver(reader, writer).Solve();
         }
     }
-
+ 
     public interface IInputReader
     {
         string ReadLine();
     }
-
+ 
     public interface IOutputWriter
     {
         void WriteLine(string output);
     }
-
+ 
     internal class ConsoleInputReader : IInputReader
     {
         public string ReadLine() => Console.ReadLine();
     }
-
+ 
     internal class ConsoleOutputWriter : IOutputWriter
     {
         public void WriteLine(string output) => Console.WriteLine(output);
     }
-
+ 
     public static class StringExtensions
     {
         public static char ToChar(this string text) => text[0];
@@ -97,92 +138,92 @@ namespace AtCoder
         public static int[] ToIntArray(this string text) => text.Split(' ').Select(txt => txt.ToInt()).ToArray();
         public static long ToLong(this string text) => long.Parse(text);
         public static long[] ToLongArray(this string text) => text.Split(' ').Select(txt => txt.ToLong()).ToArray();
-
+ 
         public static string ToJoinedString(this string[] texts, string separator = "") =>
             string.Join(separator, texts);
-
+ 
         public static string ToJoinedString(this char[] chars) => string.Join("", chars);
         public static string ToYESNO(this bool b) => b ? "YES" : "NO";
         public static string ToYesNo(this bool b) => b ? "Yes" : "No";
     }
-
+ 
     public struct ModLong : IEquatable<ModLong>
     {
         private const long Mod = 1000000007;
         private readonly long _value;
-
+ 
         public ModLong(long value)
         {
             _value = (value % Mod + Mod) % Mod;
         }
-
+ 
         public bool Equals(ModLong other)
         {
             return _value == other._value;
         }
-
+ 
         public override bool Equals(object obj)
         {
             return obj is ModLong other && Equals(other);
         }
-
+ 
         public override int GetHashCode()
         {
             return _value.GetHashCode();
         }
-
+ 
         public static bool operator ==(ModLong left, ModLong right)
         {
             return left.Equals(right);
         }
-
+ 
         public static bool operator !=(ModLong left, ModLong right)
         {
             return !left.Equals(right);
         }
-
+ 
         public static ModLong operator +(ModLong left, ModLong right)
         {
             return (ModLong) (left._value + right._value);
         }
-
+ 
         public static ModLong operator -(ModLong left, ModLong right)
         {
             return (ModLong) (left._value - right._value);
         }
-
+ 
         public static ModLong operator *(ModLong left, ModLong right)
         {
             return (ModLong) (left._value * right._value);
         }
-
+ 
         public static ModLong operator /(ModLong left, ModLong right)
         {
             return (ModLong) (left._value * Util.ModInv(right._value, Mod));
         }
-
+ 
         public static explicit operator long(ModLong num)
         {
             return num._value;
         }
-
+ 
         public static explicit operator ModLong(long num)
         {
             return new ModLong(num);
         }
-
+ 
         public override string ToString() => _value.ToString();
     }
-
+ 
     public class ModCombination
     {
         private const int Max = 510000;
         private const long Mod = 1000000007;
-
+ 
         private long[] fac = new long[Max];
         private long[] finv = new long[Max];
         private long[] inv = new long[Max];
-
+ 
         public ModCombination()
         {
             fac[0] = 1;
@@ -197,7 +238,7 @@ namespace AtCoder
                 finv[i] = finv[i - 1] * inv[i] % Mod;
             }
         }
-
+ 
         /// <summary>
         /// mCn 組み合わせ
         /// </summary>
@@ -211,7 +252,7 @@ namespace AtCoder
             return fac[m] * (finv[n] * finv[m - n] % Mod) % Mod;
         }
     }
-
+ 
     public class Util
     {
         /// <summary>
@@ -230,14 +271,14 @@ namespace AtCoder
                 {
                     res = res * a % mod;
                 }
-
+ 
                 a = a * a % mod;
                 n >>= 1;
             }
-
+ 
             return res;
         }
-
+ 
         /// <summary>
         /// a^{-1} mod を計算する
         /// </summary>
@@ -248,7 +289,7 @@ namespace AtCoder
         {
             return ModPow(a, mod - 2, mod);
         }
-
+ 
         /// <summary>
         /// 階乗
         /// </summary>
@@ -263,7 +304,7 @@ namespace AtCoder
             {
                 result *= (ModLong) i;
             }
-
+ 
             return (long) result;
         }
     }
