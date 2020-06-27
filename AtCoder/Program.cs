@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace AtCoder
@@ -16,17 +17,76 @@ namespace AtCoder
 
         public void Solve()
         {
-            var text1 = _inputReader.ReadLine();
-            var text2 = _inputReader.ReadLine();
-            var n = 0;
-            for (int i = 0; i < text1.Length; i++)
+            var numbers = _inputReader.ReadLine().ToLongArray();
+            var N = numbers[0];
+            var M = numbers[1];
+            var K = numbers[2];
+            var As = _inputReader.ReadLine().ToLongArray().ToList();
+            var Bs = _inputReader.ReadLine().ToLongArray().ToList();
+
+            var remainTime = K;
+            var readedA = 0;
+            var readedB = 0;
+            var aCount = As.Count;
+            var bCount = Bs.Count;
+
+            while (true)
             {
-                if (text1[i] != text2[i])
+                string select = "";
+                if (aCount > readedA && bCount > readedB)
                 {
-                    n++;
+                    //どちらもある
+                    if (As[readedA] <= Bs[readedB])
+                    {
+                        //A
+                        select = "A";
+                    }
+                    else
+                    {
+                        //B
+                        select = "B";
+                    }
+                }
+                else if (aCount > readedA)
+                {
+                    //A
+                    select = "A";
+                }
+                else if (bCount > readedB)
+                {
+                    //B
+                    select = "B";
+                }
+
+                if (string.IsNullOrEmpty(select)) break;
+
+                if (select == "A")
+                {
+                    if (remainTime >= As[readedA])
+                    {
+                        remainTime -= As[readedA];
+                        readedA++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    if (remainTime >= Bs[readedB])
+                    {
+                        remainTime -= Bs[readedB];
+                        readedB++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
-            _outputWriter.WriteLine(n.ToString());
+
+            _outputWriter.WriteLine((readedA + readedB).ToString());
         }
     }
 

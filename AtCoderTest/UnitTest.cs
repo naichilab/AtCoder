@@ -9,24 +9,27 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-cupofcoffee
-cupofhottea
+3 4 240
+60 90 120
+80 150 80 150
 ",
             @"
-4
+3
 ")]
         [InlineData(
             @"
-abcde
-bcdea
+3 4 730
+60 90 120
+80 150 80 150
 ",
             @"
-5
+7
 ")]
         [InlineData(
             @"
-apple
-apple
+5 4 1
+1000000000 1000000000 1000000000 1000000000 1000000000
+1000000000 1000000000 1000000000 1000000000
 ",
             @"
 0
