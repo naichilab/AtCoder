@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -18,75 +19,42 @@ namespace AtCoder
         public void Solve()
         {
             var numbers = _inputReader.ReadLine().ToLongArray();
-            var N = numbers[0];
-            var M = numbers[1];
-            var K = numbers[2];
-            var As = _inputReader.ReadLine().ToLongArray().ToList();
-            var Bs = _inputReader.ReadLine().ToLongArray().ToList();
+            _outputWriter.WriteLine((readedA + readedB).ToString());
+        }
 
-            var remainTime = K;
-            var readedA = 0;
-            var readedB = 0;
-            var aCount = As.Count;
-            var bCount = Bs.Count;
 
-            while (true)
+        private Dictionary<long, long> fDict = new Dictionary<long, long>();
+
+        public void initF()
+        {
+            for (int i = 1; i <= 10000000; i++)
             {
-                string select = "";
-                if (aCount > readedA && bCount > readedB)
-                {
-                    //どちらもある
-                    if (As[readedA] <= Bs[readedB])
-                    {
-                        //A
-                        select = "A";
-                    }
-                    else
-                    {
-                        //B
-                        select = "B";
-                    }
-                }
-                else if (aCount > readedA)
-                {
-                    //A
-                    select = "A";
-                }
-                else if (bCount > readedB)
-                {
-                    //B
-                    select = "B";
-                }
+            }
+        }
 
-                if (string.IsNullOrEmpty(select)) break;
+        public static IEnumerable<int> PrimeFactors(int n)
+        {
+            int i = 2;
+            int tmp = n;
 
-                if (select == "A")
+            while (i * i <= n) //※1
+            {
+                if (tmp % i == 0)
                 {
-                    if (remainTime >= As[readedA])
-                    {
-                        remainTime -= As[readedA];
-                        readedA++;
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    tmp /= i;
+                    yield return i;
                 }
                 else
                 {
-                    if (remainTime >= Bs[readedB])
-                    {
-                        remainTime -= Bs[readedB];
-                        readedB++;
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    i++;
                 }
             }
 
-            _outputWriter.WriteLine((readedA + readedB).ToString());
+            if (tmp != 1) yield return tmp; //最後の素数も返す
+        }
+
+        public void f(long x)
+        {
         }
     }
 
