@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
@@ -19,27 +20,23 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-            var dict = new Dictionary<int, int>();
-            for (int i = 1; i <= N; i++)
-            {
-                dict.Add(i, _inputReader.ReadLine().ToInt());
-            }
+            var nums = _inputReader.ReadLine().ToIntArray();
 
-            var current = 1;
-            var pushed = new HashSet<int>();
+            var A = nums[0];
+            var B = nums[1];
 
+            var o = 1;
+            var used = 0;
             while (true)
             {
-                if (pushed.Contains(current)) break;
-                if (current == 2) break;
+                if (o >= B) break;
 
-                var next = dict[current];
-                pushed.Add(current);
-                current = next;
+                o--;
+                used++;
+                o += A;
             }
 
-            _outputWriter.WriteLine(current == 2 ? pushed.Count.ToString() : "-1");
+            _outputWriter.WriteLine(used.ToString());
         }
     }
 
@@ -82,7 +79,10 @@ namespace AtCoder
         public static int[] ToIntArray(this string text) => text.Split(' ').Select(txt => txt.ToInt()).ToArray();
         public static long ToLong(this string text) => long.Parse(text);
         public static long[] ToLongArray(this string text) => text.Split(' ').Select(txt => txt.ToLong()).ToArray();
-        public static string ToJoinedString(this string[] texts) => string.Join("", texts);
+
+        public static string ToJoinedString(this string[] texts, string separator = "") =>
+            string.Join(separator, texts);
+
         public static string ToJoinedString(this char[] chars) => string.Join("", chars);
         public static string ToYESNO(this bool b) => b ? "YES" : "NO";
         public static string ToYesNo(this bool b) => b ? "Yes" : "No";
