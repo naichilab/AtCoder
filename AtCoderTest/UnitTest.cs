@@ -9,17 +9,27 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-2
+cupofcoffee
+cupofhottea
 ",
             @"
-14
+4
 ")]
         [InlineData(
             @"
-10
+abcde
+bcdea
 ",
             @"
-1110
+5
+")]
+        [InlineData(
+            @"
+apple
+apple
+",
+            @"
+0
 ")]
         public void Test(string inputLines, string expectOutputLines)
         {

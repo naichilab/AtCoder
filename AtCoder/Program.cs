@@ -16,8 +16,17 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-            _outputWriter.WriteLine((N + N * N + N * N * N).ToString());
+            var text1 = _inputReader.ReadLine();
+            var text2 = _inputReader.ReadLine();
+            var n = 0;
+            for (int i = 0; i < text1.Length; i++)
+            {
+                if (text1[i] != text2[i])
+                {
+                    n++;
+                }
+            }
+            _outputWriter.WriteLine(n.ToString());
         }
     }
 
