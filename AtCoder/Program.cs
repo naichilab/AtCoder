@@ -19,78 +19,24 @@ namespace AtCoder
 
         public void Solve()
         {
-            var numbers = _inputReader.ReadLine().ToLongArray();
-            var N = numbers[0];
-            var M = numbers[1];
-            var K = numbers[2];
-            var As = _inputReader.ReadLine().ToLongArray();
-            var Bs = _inputReader.ReadLine().ToLongArray();
-
-            var aTotalTimes = new List<long>();
-            var bTotalTimes = new List<long>();
-            aTotalTimes.Add(0);
-            bTotalTimes.Add(0);
-
-            for (int i = 0; i < As.Length; i++)
+            var names = new List<string>() {"AC", "WA", "TLE", "RE"};
+            var n = _inputReader.ReadLine().ToInt();
+            Dictionary<string, int> counts = new Dictionary<string, int>();
+            foreach (var name in names)
             {
-                aTotalTimes.Add(aTotalTimes[i] + As[i]);
+                counts.Add(name, 0);
             }
 
-            for (int i = 0; i < Bs.Length; i++)
+            for (int i = 0; i < n; i++)
             {
-                bTotalTimes.Add(bTotalTimes[i] + Bs[i]);
+                var result = _inputReader.ReadLine();
+                counts[result]++;
             }
 
-            var aReaded = 0;
-            var bReaded = 0;
-
-            //A->Bできるだけ買う
-            for (int i = 0; i < aTotalTimes.Count; i++)
+            foreach (var name in names)
             {
-                if (aTotalTimes[i] <= K)
-                {
-                    aReaded = i;
-                }
+                _outputWriter.WriteLine($"{name} x {counts[name]}");
             }
-
-            for (int i = 0; i < bTotalTimes.Count; i++)
-            {
-                if (aTotalTimes[aReaded] + bTotalTimes[i] <= K)
-                {
-                    bReaded = i;
-                }
-            }
-
-            var maxReaded = aReaded + bReaded;
-
-            //aを減らしながらbを増やしてみる
-            while (true)
-            {
-                if (aReaded == 0) break;
-                aReaded--;
-
-                while (true)
-                {
-                    if (bReaded == bTotalTimes.Count - 1) break;
-
-                    if (aTotalTimes[aReaded] + bTotalTimes[bReaded + 1] <= K)
-                    {
-                        bReaded++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
-                if (maxReaded < aReaded + bReaded)
-                {
-                    maxReaded = aReaded + bReaded;
-                }
-            }
-
-
-            _outputWriter.WriteLine(maxReaded.ToString());
         }
     }
 
