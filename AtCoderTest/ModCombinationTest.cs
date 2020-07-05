@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using AtCoder;
 using Xunit;
 
@@ -18,6 +20,14 @@ namespace AtCoderTest
         {
             var c = new ModCombination();
             Assert.Equal(expected, c.Combination(m, n));
+        }
+
+        [Fact]
+        public void Test組み合わせ2()
+        {
+            var nums = new List<int>() {0, 1, 2};
+            var patterns = Combination.Enumerate(nums, 2, false);
+            var x = patterns.ToList();
         }
     }
 }

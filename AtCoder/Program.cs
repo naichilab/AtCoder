@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Schema;
@@ -25,31 +26,81 @@ namespace AtCoder
             var K = inputs1[2];
 
             var map = new int[H, W];
+            var hIndexes = new int[H];
+            var wIndexes = new int[W];
 
             for (int h = 0; h < H; h++)
             {
                 var inputs2 = _inputReader.ReadLine();
+                hIndexes[h] = h;
                 for (int w = 0; w < W; w++)
                 {
+                    wIndexes[w] = w;
                     map[h, w] = inputs2[w] == '#' ? 1 : 0;
                 }
             }
 
-            var c = new ModCombination();
-            // Assert.Equal(expected, c.Combination(m, n));
-
-
-            var allPatternCount = 0L;
+            int found = 0;
             for (int h = 0; h <= H; h++)
+            for (int w = 0; w <= W; w++)
             {
-                allPatternCount += c.Combination(H + W, h);
+                var hSelectPatterns = Combination.Enumerate(hIndexes, h, false).ToList();
+                if (h == 0) hSelectPatterns.Add(new int[0]);
+                var wSelectPatterns = Combination.Enumerate(wIndexes, w, false).ToList();
+                if (w == 0) wSelectPatterns.Add(new int[0]);
+                foreach (var hSelect in hSelectPatterns)
+                foreach (var wSelect in wSelectPatterns)
+                {
+                    var cnt = 0;
+
+                    for (int hs = 0; hs < H; hs++)
+                    {
+                        if (hSelect.Contains(hs)) continue;
+                        for (int ws = 0; ws < W; ws++)
+                        {
+                            if (wSelect.Contains(ws)) continue;
+
+                            cnt += map[hs, ws];
+                        }
+                    }
+
+                    if (cnt == K)
+                    {
+                        found++;
+                    }
+                }
             }
 
-
-            // _outputWriter.WriteLine($"{name} x {counts[name]}");
+            _outputWriter.WriteLine(found.ToString());
         }
     }
 
+    public static class Combination
+    {
+        public static IEnumerable<T[]> Enumerate<T>(IEnumerable<T> items, int k, bool withRepetition)
+        {
+            if (k == 1)
+            {
+                foreach (var item in items)
+                    yield return new T[] {item};
+                yield break;
+            }
+
+            foreach (var item in items)
+            {
+                var leftside = new T[] {item};
+
+                // item よりも前のものを除く （順列と組み合わせの違い)
+                // 重複を許さないので、unusedから item そのものも取り除く
+                var unused = withRepetition ? items : items.SkipWhile(e => !e.Equals(item)).Skip(1).ToList();
+
+                foreach (var rightside in Enumerate(unused, k - 1, withRepetition))
+                {
+                    yield return leftside.Concat(rightside).ToArray();
+                }
+            }
+        }
+    }
 
     internal class Program
     {
