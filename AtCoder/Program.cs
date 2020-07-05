@@ -19,24 +19,34 @@ namespace AtCoder
 
         public void Solve()
         {
-            var names = new List<string>() {"AC", "WA", "TLE", "RE"};
-            var n = _inputReader.ReadLine().ToInt();
-            Dictionary<string, int> counts = new Dictionary<string, int>();
-            foreach (var name in names)
+            var inputs1 = _inputReader.ReadLine().ToIntArray();
+            var H = inputs1[0];
+            var W = inputs1[1];
+            var K = inputs1[2];
+
+            var map = new int[H, W];
+
+            for (int h = 0; h < H; h++)
             {
-                counts.Add(name, 0);
+                var inputs2 = _inputReader.ReadLine();
+                for (int w = 0; w < W; w++)
+                {
+                    map[h, w] = inputs2[w] == '#' ? 1 : 0;
+                }
             }
 
-            for (int i = 0; i < n; i++)
+            var c = new ModCombination();
+            // Assert.Equal(expected, c.Combination(m, n));
+
+
+            var allPatternCount = 0L;
+            for (int h = 0; h <= H; h++)
             {
-                var result = _inputReader.ReadLine();
-                counts[result]++;
+                allPatternCount += c.Combination(H + W, h);
             }
 
-            foreach (var name in names)
-            {
-                _outputWriter.WriteLine($"{name} x {counts[name]}");
-            }
+
+            // _outputWriter.WriteLine($"{name} x {counts[name]}");
         }
     }
 
