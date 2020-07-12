@@ -21,7 +21,7 @@ namespace AtCoder
         public void Solve()
         {
             var inputs = _inputReader.ReadLine();
-            _outputWriter.WriteLine(inputs[0] == '9' || inputs[1] == '9' ? "Yes" : "No");
+            _outputWriter.WriteLine((inputs[0] == '9' || inputs[1] == '9').ToYesNo());
         }
     }
 
