@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using AtCoder;
@@ -42,6 +43,38 @@ namespace AtCoderTest
             Assert.Equal(expected, text.ToIntArray());
         }
 
+        [Fact]
+        public void TestStringToInt2()
+        {
+            Assert.Equal((1, 2), "1 2".ToInt2());
+            Assert.Equal((3, 5), "3 5".ToInt2());
+        }
+
+        [Theory]
+        [InlineData("1 2", 1, 2)]
+        [InlineData("3 5", 3, 5)]
+        public void TestStringToInt2x(string text, int expected1, int expected2)
+        {
+            Assert.Equal((expected1, expected2), text.ToInt2());
+        }
+        
+        
+        // [Theory]
+        // [InlineData("1 2", (1, 2))]
+        // [InlineData("3 5", (3, 5))]
+        // public void TestStringToInt2xx(string text, Tuple<int, int> expected)
+        // {
+        //     Assert.Equal(expected, text.ToInt2());
+        // }
+
+        
+        [Fact]
+        public void TestStringToInt3()
+        {
+            Assert.Equal((1, 2, 3), "1 2 3".ToInt3());
+            Assert.Equal((3, 5, 7), "3 5 7".ToInt3());
+        }
+
         [Theory]
         [InlineData("-1", -1L)]
         [InlineData("0", 0)]
@@ -66,12 +99,12 @@ namespace AtCoderTest
         {
             Assert.Equal(expected, inputs.ToJoinedString());
         }
+
         [Theory]
-        [InlineData(new[] {'a','b','c'}, "abc")]
+        [InlineData(new[] {'a', 'b', 'c'}, "abc")]
         public void TestCharArrayToJoinedString(char[] inputs, string expected)
         {
             Assert.Equal(expected, inputs.ToJoinedString());
         }
-
     }
 }

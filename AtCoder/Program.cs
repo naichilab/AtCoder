@@ -20,11 +20,10 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-            var A = _inputReader.ReadLine().ToInt();
-
-
-            _outputWriter.WriteLine((N * N - A).ToString());
+            var (a, b, c) = _inputReader.ReadLine().ToInt3();
+            if (a == b) _outputWriter.WriteLine(c.ToString());
+            else if (a == c) _outputWriter.WriteLine(b.ToString());
+            else _outputWriter.WriteLine(a.ToString());
         }
     }
 
@@ -91,6 +90,19 @@ namespace AtCoder
         public static string[] ToStringArray(this string text) => text.Split(' ').ToArray();
         public static int ToInt(this string text) => int.Parse(text);
         public static int[] ToIntArray(this string text) => text.Split(' ').Select(txt => txt.ToInt()).ToArray();
+
+        public static (int, int) ToInt2(this string text)
+        {
+            var arr = text.ToIntArray();
+            return (arr[0], arr[1]);
+        }
+
+        public static (int, int, int) ToInt3(this string text)
+        {
+            var arr = text.ToIntArray();
+            return (arr[0], arr[1], arr[2]);
+        }
+
         public static long ToLong(this string text) => long.Parse(text);
         public static long[] ToLongArray(this string text) => text.Split(' ').Select(txt => txt.ToLong()).ToArray();
 
