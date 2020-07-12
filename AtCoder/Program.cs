@@ -20,58 +20,26 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs1 = _inputReader.ReadLine().ToIntArray();
-            var H = inputs1[0];
-            var W = inputs1[1];
-            var K = inputs1[2];
+            var inputs = _inputReader.ReadLine().ToLongArray();
+            var x = inputs[0];
+            var a = inputs[1];
+            var b = inputs[2];
 
-            var map = new int[H, W];
-            var hIndexes = new int[H];
-            var wIndexes = new int[W];
-
-            for (int h = 0; h < H; h++)
+            if (b <= a)
             {
-                var inputs2 = _inputReader.ReadLine();
-                hIndexes[h] = h;
-                for (int w = 0; w < W; w++)
+                _outputWriter.WriteLine("delicious");
+            }
+            else
+            {
+                if (b > a + x)
                 {
-                    wIndexes[w] = w;
-                    map[h, w] = inputs2[w] == '#' ? 1 : 0;
+                    _outputWriter.WriteLine("dangerous");
+                }
+                else
+                {
+                    _outputWriter.WriteLine("safe");
                 }
             }
-
-            int found = 0;
-            for (int h = 0; h <= H; h++)
-            for (int w = 0; w <= W; w++)
-            {
-                var hSelectPatterns = Combination.Enumerate(hIndexes, h, false).ToList();
-                if (h == 0) hSelectPatterns.Add(new int[0]);
-                var wSelectPatterns = Combination.Enumerate(wIndexes, w, false).ToList();
-                if (w == 0) wSelectPatterns.Add(new int[0]);
-                foreach (var hSelect in hSelectPatterns)
-                foreach (var wSelect in wSelectPatterns)
-                {
-                    var cnt = 0;
-
-                    for (int hs = 0; hs < H; hs++)
-                    {
-                        if (hSelect.Contains(hs)) continue;
-                        for (int ws = 0; ws < W; ws++)
-                        {
-                            if (wSelect.Contains(ws)) continue;
-
-                            cnt += map[hs, ws];
-                        }
-                    }
-
-                    if (cnt == K)
-                    {
-                        found++;
-                    }
-                }
-            }
-
-            _outputWriter.WriteLine(found.ToString());
         }
     }
 
