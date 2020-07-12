@@ -20,26 +20,11 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs = _inputReader.ReadLine().ToLongArray();
-            var x = inputs[0];
-            var a = inputs[1];
-            var b = inputs[2];
+            var inputs = _inputReader.ReadLine().ToIntArray();
 
-            if (b <= a)
-            {
-                _outputWriter.WriteLine("delicious");
-            }
-            else
-            {
-                if (b > a + x)
-                {
-                    _outputWriter.WriteLine("dangerous");
-                }
-                else
-                {
-                    _outputWriter.WriteLine("safe");
-                }
-            }
+            var price = inputs.OrderBy(n => n).Take(2).Sum();
+
+            _outputWriter.WriteLine(price.ToString());
         }
     }
 
