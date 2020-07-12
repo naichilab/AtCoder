@@ -22,9 +22,11 @@ namespace AtCoder
         {
             var inputs = _inputReader.ReadLine().ToIntArray();
 
-            var price = inputs.OrderBy(n => n).Take(2).Sum();
-
-            _outputWriter.WriteLine(price.ToString());
+            var A = inputs[0];
+            var B = inputs[1];
+            var list = new List<int>() {A, B, A + B};
+            var possible = list.Any(n => n >= 3 && n % 3 == 0);
+            _outputWriter.WriteLine(possible ? "Possible" : "Impossible");
         }
     }
 
