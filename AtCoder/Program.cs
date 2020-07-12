@@ -20,8 +20,11 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs = _inputReader.ReadLine();
-            _outputWriter.WriteLine((inputs[0] == '9' || inputs[1] == '9').ToYesNo());
+            var N = _inputReader.ReadLine().ToInt();
+            var A = _inputReader.ReadLine().ToInt();
+
+
+            _outputWriter.WriteLine((N * N - A).ToString());
         }
     }
 
