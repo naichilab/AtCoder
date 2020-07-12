@@ -20,18 +20,8 @@ namespace AtCoder
 
         public void Solve()
         {
-            var inputs = _inputReader.ReadLine().ToLongArray();
-            var X = inputs[0];
-            var t = inputs[1];
-
-            if (X > t)
-            {
-                _outputWriter.WriteLine((X - t).ToString());
-            }
-            else
-            {
-                _outputWriter.WriteLine(0.ToString());
-            }
+            var inputs = _inputReader.ReadLine();
+            _outputWriter.WriteLine(inputs[0] == '9' || inputs[1] == '9' ? "Yes" : "No");
         }
     }
 
