@@ -20,11 +20,26 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (x, y) = _inputReader.ReadLine().ToString2();
-            var c1 = x[0];
-            var c2 = y[0];
-            if (c1 == c2) _outputWriter.WriteLine("=");
-            else _outputWriter.WriteLine(c1 < c2 ? "<" : ">");
+            var s = _inputReader.ReadLine();
+            int n = 0;
+            char lastChar = ' ';
+            bool good = false;
+            foreach (var c in s)
+            {
+                if (lastChar == c || lastChar == ' ')
+                {
+                    n++;
+                    if (n >= 3) good = true;
+                }
+                else
+                {
+                    n = 1;
+                }
+
+                lastChar = c;
+            }
+
+            _outputWriter.WriteLine(good.ToYesNo());
         }
     }
 
