@@ -20,15 +20,11 @@ namespace AtCoder
 
         public void Solve()
         {
-            var s1 = _inputReader.ReadLine();
-            var c1 = s1[0];
-            var c2 = s1[1];
-            var c3 = s1[2];
-            var s2 = _inputReader.ReadLine();
-            var c4 = s2[0];
-            var c5 = s2[1];
-            var c6 = s2[2];
-            _outputWriter.WriteLine((c1 == c6 && c2 == c5 && c3 == c4).ToYESNO());
+            var (x, y) = _inputReader.ReadLine().ToString2();
+            var c1 = x[0];
+            var c2 = y[0];
+            if (c1 == c2) _outputWriter.WriteLine("=");
+            else _outputWriter.WriteLine(c1 < c2 ? "<" : ">");
         }
     }
 
@@ -95,6 +91,18 @@ namespace AtCoder
         public static string[] ToStringArray(this string text) => text.Split(' ').ToArray();
         public static int ToInt(this string text) => int.Parse(text);
         public static int[] ToIntArray(this string text) => text.Split(' ').Select(txt => txt.ToInt()).ToArray();
+
+        public static (string, string) ToString2(this string text)
+        {
+            var arr = text.ToStringArray();
+            return (arr[0], arr[1]);
+        }
+
+        public static (string, string, string) ToString3(this string text)
+        {
+            var arr = text.ToStringArray();
+            return (arr[0], arr[1], arr[2]);
+        }
 
         public static (int, int) ToInt2(this string text)
         {

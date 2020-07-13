@@ -24,6 +24,20 @@ namespace AtCoderTest
             Assert.Equal(expected, text.ToStringArray());
         }
 
+        [Fact]
+        public void TestStringToString2()
+        {
+            Assert.Equal(("1", "2"), "1 2".ToString2());
+            Assert.Equal(("3", "5"), "3 5".ToString2());
+        }
+
+        [Fact]
+        public void TestStringToString3()
+        {
+            Assert.Equal(("1", "2", "3"), "1 2 3".ToString3());
+            Assert.Equal(("3", "5", "7"), "3 5 7".ToString3());
+        }
+
 
         [Theory]
         [InlineData("-1", -1)]
