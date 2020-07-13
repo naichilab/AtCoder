@@ -15,5 +15,12 @@ namespace AtCoderTest
             Assert.Equal(expected, value.ToYesNo());
         }
 
+        [Theory]
+        [InlineData(true, "YES")]
+        [InlineData(false, "NO")]
+        public void TestToYESNO(bool value, string expected)
+        {
+            Assert.Equal(expected, value.ToYESNO());
+        }
     }
 }

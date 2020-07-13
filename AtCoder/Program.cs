@@ -20,9 +20,15 @@ namespace AtCoder
 
         public void Solve()
         {
-            var R = _inputReader.ReadLine().ToInt();
-            var G = _inputReader.ReadLine().ToInt();
-            _outputWriter.WriteLine(((G - R) * 2 + R).ToString());
+            var s1 = _inputReader.ReadLine();
+            var c1 = s1[0];
+            var c2 = s1[1];
+            var c3 = s1[2];
+            var s2 = _inputReader.ReadLine();
+            var c4 = s2[0];
+            var c5 = s2[1];
+            var c6 = s2[2];
+            _outputWriter.WriteLine((c1 == c6 && c2 == c5 && c3 == c4).ToYESNO());
         }
     }
 
