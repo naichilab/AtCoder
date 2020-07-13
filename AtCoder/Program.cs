@@ -20,26 +20,10 @@ namespace AtCoder
 
         public void Solve()
         {
-            var s = _inputReader.ReadLine();
-            int n = 0;
-            char lastChar = ' ';
-            bool good = false;
-            foreach (var c in s)
-            {
-                if (lastChar == c || lastChar == ' ')
-                {
-                    n++;
-                    if (n >= 3) good = true;
-                }
-                else
-                {
-                    n = 1;
-                }
-
-                lastChar = c;
-            }
-
-            _outputWriter.WriteLine(good.ToYesNo());
+            var (n, a, b) = _inputReader.ReadLine().ToInt3();
+            var p1 = n * a;
+            var p2 = b;
+            _outputWriter.WriteLine(Math.Min(p1, p2).ToString());
         }
     }
 
