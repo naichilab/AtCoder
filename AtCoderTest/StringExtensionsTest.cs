@@ -50,24 +50,6 @@ namespace AtCoderTest
             Assert.Equal((3, 5), "3 5".ToInt2());
         }
 
-        [Theory]
-        [InlineData("1 2", 1, 2)]
-        [InlineData("3 5", 3, 5)]
-        public void TestStringToInt2x(string text, int expected1, int expected2)
-        {
-            Assert.Equal((expected1, expected2), text.ToInt2());
-        }
-        
-        
-        // [Theory]
-        // [InlineData("1 2", (1, 2))]
-        // [InlineData("3 5", (3, 5))]
-        // public void TestStringToInt2xx(string text, Tuple<int, int> expected)
-        // {
-        //     Assert.Equal(expected, text.ToInt2());
-        // }
-
-        
         [Fact]
         public void TestStringToInt3()
         {

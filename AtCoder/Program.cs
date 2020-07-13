@@ -20,10 +20,9 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (a, b, c) = _inputReader.ReadLine().ToInt3();
-            if (a == b) _outputWriter.WriteLine(c.ToString());
-            else if (a == c) _outputWriter.WriteLine(b.ToString());
-            else _outputWriter.WriteLine(a.ToString());
+            var R = _inputReader.ReadLine().ToInt();
+            var G = _inputReader.ReadLine().ToInt();
+            _outputWriter.WriteLine(((G - R) * 2 + R).ToString());
         }
     }
 
