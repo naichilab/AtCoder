@@ -20,24 +20,14 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (A, B, C) = _inputReader.ReadLine().ToInt3();
+            var (N, K) = _inputReader.ReadLine().ToInt2();
+            var arr = _inputReader.ReadLine().ToIntArray();
 
-            var K = _inputReader.ReadLine().ToInt();
-
-            var n = 0;
-            while (A >= B)
+            for (int i = 0; i < arr.Length; i++)
             {
-                B *= 2;
-                n++;
+                if (i < K) continue;
+                _outputWriter.WriteLine((arr[i] > arr[i - K]).ToYesNo());
             }
-
-            while (B >= C)
-            {
-                C *= 2;
-                n++;
-            }
-
-            _outputWriter.WriteLine((n <= K).ToYesNo());
         }
     }
 
