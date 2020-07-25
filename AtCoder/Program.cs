@@ -20,16 +20,24 @@ namespace AtCoder
 
         public void Solve()
         {
-            var x = _inputReader.ReadLine().ToInt();
-            if(x>=1800) _outputWriter.WriteLine("1");
-            else if(x>=1600) _outputWriter.WriteLine("2");
-            else if(x>=1400) _outputWriter.WriteLine("3");
-            else if(x>=1200) _outputWriter.WriteLine("4");
-            else if(x>=1000) _outputWriter.WriteLine("5");
-            else if(x>=800) _outputWriter.WriteLine("6");
-            else if(x>=600) _outputWriter.WriteLine("7");
-            else if(x>=400) _outputWriter.WriteLine("8");
-            else {}
+            var (A, B, C) = _inputReader.ReadLine().ToInt3();
+
+            var K = _inputReader.ReadLine().ToInt();
+
+            var n = 0;
+            while (A >= B)
+            {
+                B *= 2;
+                n++;
+            }
+
+            while (B >= C)
+            {
+                C *= 2;
+                n++;
+            }
+
+            _outputWriter.WriteLine((n <= K).ToYesNo());
         }
     }
 

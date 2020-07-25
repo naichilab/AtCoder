@@ -9,17 +9,19 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-725
+7 2 5
+3
 ",
             @"
-7
+Yes
 ")]
         [InlineData(
             @"
-1600
+7 4 2
+3
 ",
             @"
-2
+No
 ")]
         public void Test(string inputLines, string expectOutputLines)
         {
