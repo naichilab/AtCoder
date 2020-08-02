@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -21,55 +22,26 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-            var chars = _inputReader.ReadLine().ToCharArray();
+            var (N, Q) = _inputReader.ReadLine().ToInt2();
+            var colors = _inputReader.ReadLine().ToIntArray().ToList();
+            var dict = new Dictionary<int, Dictionary<int, int>>();
 
-            int leftSearchedIndex = -1;
-            int rightSearchedIndex = chars.Length;
-            int count = 0;
-            while (true)
+            for (int left = 0; left < colors.Count; left++)
             {
-                int firstWhiteIndex = -1;
-                int lastRedIndex = -1;
-
-                //左からWを探す
-                for (int i = leftSearchedIndex + 1; i < chars.Length; i++)
+                dict.Add(left, new Dictionary<int, int>());
+                var hash = new HashSet<int>();
+                for (int right = left; right < colors.Count(); right++)
                 {
-                    if (i >= rightSearchedIndex) break;
-                   
-                    if (chars[i] == 'W')
-                    {
-                        firstWhiteIndex = i;
-                        leftSearchedIndex = i;
-                        break;
-                    }
-                }
-
-                //右からRを探す
-                for (int i = rightSearchedIndex - 1; i >= 0; i--)
-                {
-                    if (i <= leftSearchedIndex) break;
-                    if (chars[i] == 'R')
-                    {
-                        lastRedIndex = i;
-                        rightSearchedIndex = i;
-                        break;
-                    }
-                }
-
-                if (firstWhiteIndex != -1 && lastRedIndex != -1 && firstWhiteIndex < lastRedIndex)
-                {
-                    chars[firstWhiteIndex] = 'R';
-                    chars[lastRedIndex] = 'W';
-                    count++;
-                }
-                else
-                {
-                    break;
+                    hash.Add(colors[right]);
+                    dict[left].Add(right, hash.Count());
                 }
             }
 
-            _outputWriter.WriteLine(count.ToString());
+            for (int i = 0; i < Q; i++)
+            {
+                var (l, r) = _inputReader.ReadLine().ToInt2();
+                _outputWriter.WriteLine( dict[l-1][r-1].ToString());
+            }
         }
     }
 
