@@ -20,14 +20,19 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (N, K) = _inputReader.ReadLine().ToInt2();
-            var arr = _inputReader.ReadLine().ToIntArray();
-
-            for (int i = 0; i < arr.Length; i++)
+            var (N, D) = _inputReader.ReadLine().ToInt2();
+            var count = 0;
+            for (int i = 0; i < N; i++)
             {
-                if (i < K) continue;
-                _outputWriter.WriteLine((arr[i] > arr[i - K]).ToYesNo());
+                var ( X, Y) = _inputReader.ReadLine().ToInt2();
+                var distance = Math.Sqrt((double)X * (double)X + (double)Y * (double)Y);
+                if (distance <= (double) D)
+                {
+                    count++;
+                }
             }
+
+            _outputWriter.WriteLine(count.ToString());
         }
     }
 
