@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Xml.Schema;
 
 namespace AtCoder
@@ -20,15 +21,51 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (N, D) = _inputReader.ReadLine().ToInt2();
-            var count = 0;
-            for (int i = 0; i < N; i++)
+            var N = _inputReader.ReadLine().ToInt();
+            var chars = _inputReader.ReadLine().ToCharArray();
+
+            int leftSearchedIndex = -1;
+            int rightSearchedIndex = chars.Length;
+            int count = 0;
+            while (true)
             {
-                var ( X, Y) = _inputReader.ReadLine().ToInt2();
-                var distance = Math.Sqrt((double)X * (double)X + (double)Y * (double)Y);
-                if (distance <= (double) D)
+                int firstWhiteIndex = -1;
+                int lastRedIndex = -1;
+
+                //左からWを探す
+                for (int i = leftSearchedIndex + 1; i < chars.Length; i++)
                 {
+                    if (i >= rightSearchedIndex) break;
+                   
+                    if (chars[i] == 'W')
+                    {
+                        firstWhiteIndex = i;
+                        leftSearchedIndex = i;
+                        break;
+                    }
+                }
+
+                //右からRを探す
+                for (int i = rightSearchedIndex - 1; i >= 0; i--)
+                {
+                    if (i <= leftSearchedIndex) break;
+                    if (chars[i] == 'R')
+                    {
+                        lastRedIndex = i;
+                        rightSearchedIndex = i;
+                        break;
+                    }
+                }
+
+                if (firstWhiteIndex != -1 && lastRedIndex != -1 && firstWhiteIndex < lastRedIndex)
+                {
+                    chars[firstWhiteIndex] = 'R';
+                    chars[lastRedIndex] = 'W';
                     count++;
+                }
+                else
+                {
+                    break;
                 }
             }
 
