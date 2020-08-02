@@ -22,25 +22,33 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (N, Q) = _inputReader.ReadLine().ToInt2();
-            var colors = _inputReader.ReadLine().ToIntArray().ToList();
-            var dict = new Dictionary<int, Dictionary<int, int>>();
+            var K = _inputReader.ReadLine().ToInt();
+            var a = new bool[1000001];
+            var c = 1;
+            var m = 7;
+            var non = false;
 
-            for (int left = 0; left < colors.Count; left++)
+            while (true)
             {
-                dict.Add(left, new Dictionary<int, int>());
-                var hash = new HashSet<int>();
-                for (int right = left; right < colors.Count(); right++)
+                if (m % K == 0) break;
+                m = (m * 10 + 7) % K;
+                if (a[m])
                 {
-                    hash.Add(colors[right]);
-                    dict[left].Add(right, hash.Count());
+                    non = true;
+                    break;
                 }
+
+                a[m] = true;
+                c += 1;
             }
 
-            for (int i = 0; i < Q; i++)
+            if (non)
             {
-                var (l, r) = _inputReader.ReadLine().ToInt2();
-                _outputWriter.WriteLine( dict[l-1][r-1].ToString());
+                _outputWriter.WriteLine("-1");
+            }
+            else
+            {
+                _outputWriter.WriteLine(c.ToString());
             }
         }
     }
