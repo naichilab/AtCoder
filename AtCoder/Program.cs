@@ -24,26 +24,16 @@ namespace AtCoder
         {
             var N = _inputReader.ReadLine().ToInt();
 
-            int zoroCount = 0;
-            for (int i = 0; i < N; i++)
-            {
-                var (d1, d2) = _inputReader.ReadLine().ToInt2();
-                if (d1 == d2)
-                {
-                    zoroCount++;
-                }
-                else
-                {
-                    zoroCount = 0;
-                }
 
-                if (zoroCount >= 3)
-                {
-                    _outputWriter.WriteLine(true.ToYesNo());
-                    return;
-                }
+            var n = 0;
+            for (int A = 1; A <= N; A++)
+            for (int B = 1; B <= N; B++)
+            {
+                if (A * B >= N) break;
+                n++;
             }
-            _outputWriter.WriteLine(false.ToYesNo());
+
+            _outputWriter.WriteLine(n.ToString());
         }
     }
 
