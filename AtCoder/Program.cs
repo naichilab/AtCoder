@@ -22,16 +22,28 @@ namespace AtCoder
 
         public void Solve()
         {
-            var s = _inputReader.ReadLine();
+            var N = _inputReader.ReadLine().ToInt();
 
-            if (s.EndsWith('s'))
+            int zoroCount = 0;
+            for (int i = 0; i < N; i++)
             {
-                _outputWriter.WriteLine(s + "es");
+                var (d1, d2) = _inputReader.ReadLine().ToInt2();
+                if (d1 == d2)
+                {
+                    zoroCount++;
+                }
+                else
+                {
+                    zoroCount = 0;
+                }
+
+                if (zoroCount >= 3)
+                {
+                    _outputWriter.WriteLine(true.ToYesNo());
+                    return;
+                }
             }
-            else
-            {
-                _outputWriter.WriteLine(s + "s");
-            }
+            _outputWriter.WriteLine(false.ToYesNo());
         }
     }
 
