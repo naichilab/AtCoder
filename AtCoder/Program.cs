@@ -22,33 +22,15 @@ namespace AtCoder
 
         public void Solve()
         {
-            var K = _inputReader.ReadLine().ToInt();
-            var a = new bool[1000001];
-            var c = 1;
-            var m = 7;
-            var non = false;
+            var s = _inputReader.ReadLine();
 
-            while (true)
+            if (s.EndsWith('s'))
             {
-                if (m % K == 0) break;
-                m = (m * 10 + 7) % K;
-                if (a[m])
-                {
-                    non = true;
-                    break;
-                }
-
-                a[m] = true;
-                c += 1;
-            }
-
-            if (non)
-            {
-                _outputWriter.WriteLine("-1");
+                _outputWriter.WriteLine(s + "es");
             }
             else
             {
-                _outputWriter.WriteLine(c.ToString());
+                _outputWriter.WriteLine(s + "s");
             }
         }
     }
