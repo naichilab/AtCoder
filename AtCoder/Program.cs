@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Xml.Schema;
+using System.Text.RegularExpressions;
 
 namespace AtCoder
 {
@@ -22,18 +18,22 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-
-
-            var n = 0;
-            for (int A = 1; A <= N; A++)
-            for (int B = 1; B <= N; B++)
+            var text = _inputReader.ReadLine();
+            while (true)
             {
-                if (A * B >= N) break;
-                n++;
+                var m = Regex.Match(text, "^0(.*)0$");
+                if (!m.Success) break;
+                text = m.Groups[0].Value;
             }
 
-            _outputWriter.WriteLine(n.ToString());
+            if (text.StartsWith('0'))
+            {
+                _outputWriter.WriteLine(false.ToYesNo());
+                return;
+            }
+
+            text = text.TrimEnd('0');
+            _outputWriter.WriteLine((text == string.Join("",text.Reverse())).ToYesNo());
         }
     }
 
