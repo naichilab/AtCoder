@@ -18,8 +18,9 @@ namespace AtCoder
 
         public void Solve()
         {
-            var M = _inputReader.ReadLine().ToInt();
-            _outputWriter.WriteLine((24 + 24 - M).ToString());
+            var S = _inputReader.ReadLine().ToCharArray();
+            S[3] = '8';
+            _outputWriter.WriteLine(new string(S));
         }
     }
 
