@@ -18,9 +18,17 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (a, b, c) = _inputReader.ReadLine().ToInt3();
-            var result = (a * a + b * b) < (c * c);
-            _outputWriter.WriteLine(result.ToYesNo());
+            var n = _inputReader.ReadLine().ToInt();
+            var aMax = _inputReader.ReadLine().ToIntArray().Max();
+            var bMin = _inputReader.ReadLine().ToIntArray().Min();
+            if (bMin < aMax)
+            {
+                _outputWriter.WriteLine("0");
+            }
+            else
+            {
+                _outputWriter.WriteLine((bMin + 1 - aMax).ToString());
+            }
         }
     }
 
