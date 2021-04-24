@@ -18,8 +18,11 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (a, b, c) = _inputReader.ReadLine().ToInt3();
-            _outputWriter.WriteLine(((a + b) >= c).ToYesNo());
+            var a = _inputReader.ReadLine().ToInt();
+            var b = _inputReader.ReadLine().ToInt();
+            var c = _inputReader.ReadLine().ToInt();
+            var d = _inputReader.ReadLine().ToInt();
+            _outputWriter.WriteLine((Math.Min(a, b) + Math.Min(c, d)).ToString());
         }
     }
 
