@@ -18,43 +18,10 @@ namespace AtCoder
 
         public void Solve()
         {
-            var n = _inputReader.ReadLine().ToInt();
-            var s = _inputReader.ReadLine().ToCharArray();
-            var q = _inputReader.ReadLine().ToInt();
+            var (a, b) = _inputReader.ReadLine().ToInt2();
+            var ave = (int) Math.Ceiling(((double) a + (double) b) / 2.0);
 
-            var flipped = false;
-
-            for (int i = 0; i < q; i++)
-            {
-                var (t, a, b) = _inputReader.ReadLine().ToInt3();
-
-                if (flipped)
-                {
-                    a = ((a - 1 + n) % (2 * n)) + 1;
-                    b = ((b - 1 + n) % (2 * n)) + 1;
-                }
-
-                if (t == 1)
-                {
-                    var buf = s[a - 1];
-                    s[a - 1] = s[b - 1];
-                    s[b - 1] = buf;
-                }
-
-                if (t == 2)
-                {
-                    flipped = !flipped;
-                }
-            }
-
-            if (flipped)
-            {
-                var txt = new string(s);
-                var swapped = txt.Substring(n) + txt.Substring(0, n);
-                s = swapped.ToCharArray();
-            }
-
-            _outputWriter.WriteLine(new string(s));
+            _outputWriter.WriteLine(ave.ToString());
         }
     }
 
