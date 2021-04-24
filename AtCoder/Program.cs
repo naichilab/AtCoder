@@ -18,21 +18,8 @@ namespace AtCoder
 
         public void Solve()
         {
-            var array = _inputReader.ReadLine().ToIntArray();
-            var l = array[0] + array[1];
-            var r = array[2] + array[3];
-            if (l > r)
-            {
-                _outputWriter.WriteLine("Left");
-            }
-            else if (r > l)
-            {
-                _outputWriter.WriteLine("Right");
-            }
-            else
-            {
-                _outputWriter.WriteLine("Balanced");
-            }
+            var M = _inputReader.ReadLine().ToInt();
+            _outputWriter.WriteLine((24 + 24 - M).ToString());
         }
     }
 
