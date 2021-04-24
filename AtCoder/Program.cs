@@ -18,10 +18,9 @@ namespace AtCoder
 
         public void Solve()
         {
-            var X = _inputReader.ReadLine().ToInt();
+            var N = _inputReader.ReadLine().ToInt();
             var A = _inputReader.ReadLine().ToInt();
-            var B = _inputReader.ReadLine().ToInt();
-            _outputWriter.WriteLine(((X - A) % B).ToString());
+            _outputWriter.WriteLine(((N % 500) <= A).ToYesNo());
         }
     }
 
