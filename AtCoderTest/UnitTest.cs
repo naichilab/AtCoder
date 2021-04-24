@@ -9,25 +9,23 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-3 8 7 1
+ant
+obe
+rec
 ",
             @"
-Left
+abc
 ")]
         [InlineData(
             @"
-3 4 5 2
+edu
+cat
+ion
 ",
             @"
-Balanced
+ean
 ")]
-        [InlineData(
-            @"
-1 7 6 4
-",
-            @"
-Right
-")]
+     
         public void Test(string inputLines, string expectOutputLines)
         {
             var reader = new TestInputReader(inputLines);

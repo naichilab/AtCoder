@@ -18,8 +18,10 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-            _outputWriter.WriteLine(((N / 3)).ToString());
+            var text1 = _inputReader.ReadLine().ToCharArray();
+            var text2 = _inputReader.ReadLine().ToCharArray();
+            var text3 = _inputReader.ReadLine().ToCharArray();
+            _outputWriter.WriteLine((text1[0].ToString() + text2[1].ToString() + text3[2].ToString()).ToString());
         }
     }
 
