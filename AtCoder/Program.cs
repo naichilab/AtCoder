@@ -18,10 +18,21 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (a, b) = _inputReader.ReadLine().ToInt2();
-            var ave = (int) Math.Ceiling(((double) a + (double) b) / 2.0);
-
-            _outputWriter.WriteLine(ave.ToString());
+            var array = _inputReader.ReadLine().ToIntArray();
+            var l = array[0] + array[1];
+            var r = array[2] + array[3];
+            if (l > r)
+            {
+                _outputWriter.WriteLine("Left");
+            }
+            else if (r > l)
+            {
+                _outputWriter.WriteLine("Right");
+            }
+            else
+            {
+                _outputWriter.WriteLine("Balanced");
+            }
         }
     }
 
