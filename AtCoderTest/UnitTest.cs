@@ -10,29 +10,28 @@ namespace AtCoderTest
         [InlineData(
             @"
 2
-3 2
-7 5
+FLIP
+2
+2 0 0
+1 1 4
 ",
             @"
-3
+LPFI
 ")]
         [InlineData(
-            @"
-3
-1 5 3
-10 7 3
-",
-            @"
-0
-")]
-        [InlineData(
-            @"
-3
-3 2 5
-6 9 8
-",
             @"
 2
+FLIP
+6
+1 1 3
+2 0 0
+1 1 2
+1 2 3
+2 0 0
+1 1 4
+",
+            @"
+ILPF
 ")]
         public void Test(string inputLines, string expectOutputLines)
         {
