@@ -18,22 +18,9 @@ namespace AtCoder
 
         public void Solve()
         {
-            var text = _inputReader.ReadLine();
-            while (true)
-            {
-                var m = Regex.Match(text, "^0(.*)0$");
-                if (!m.Success) break;
-                text = m.Groups[0].Value;
-            }
-
-            if (text.StartsWith('0'))
-            {
-                _outputWriter.WriteLine(false.ToYesNo());
-                return;
-            }
-
-            text = text.TrimEnd('0');
-            _outputWriter.WriteLine((text == string.Join("",text.Reverse())).ToYesNo());
+            var (a, b, c) = _inputReader.ReadLine().ToInt3();
+            var result = (a * a + b * b) < (c * c);
+            _outputWriter.WriteLine(result.ToYesNo());
         }
     }
 
