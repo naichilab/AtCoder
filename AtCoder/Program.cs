@@ -18,11 +18,23 @@ namespace AtCoder
 
         public void Solve()
         {
-            var a = _inputReader.ReadLine().ToInt();
-            var b = _inputReader.ReadLine().ToInt();
-            var c = _inputReader.ReadLine().ToInt();
-            var d = _inputReader.ReadLine().ToInt();
-            _outputWriter.WriteLine((Math.Min(a, b) + Math.Min(c, d)).ToString());
+            var s = _inputReader.ReadLine();
+            if (s.Contains("ZONeZONeZONe"))
+            {
+                _outputWriter.WriteLine("3");
+            }
+            else if (s.Contains("ZONeZONe"))
+            {
+                _outputWriter.WriteLine("2");
+            }
+            else if (s.Contains("ZONe"))
+            {
+                _outputWriter.WriteLine("1");
+            }
+            else
+            {
+                _outputWriter.WriteLine("0");
+            }
         }
     }
 

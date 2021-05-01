@@ -9,21 +9,24 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-ant
-obe
-rec
+abcdZONefghi
 ",
             @"
-abc
+1
 ")]
         [InlineData(
             @"
-edu
-cat
-ion
+ZONeZONeZONe
 ",
             @"
-ean
+3
+")]
+        [InlineData(
+            @"
+helloAtZoner
+",
+            @"
+0
 ")]
      
         public void Test(string inputLines, string expectOutputLines)
