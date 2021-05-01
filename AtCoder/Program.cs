@@ -18,23 +18,24 @@ namespace AtCoder
 
         public void Solve()
         {
-            var s = _inputReader.ReadLine();
-            if (s.Contains("ZONeZONeZONe"))
+            var (N, D, H) = _inputReader.ReadLine().ToInt3();
+            var current = 0d;
+            for (int i = 0; i < N; i++)
             {
-                _outputWriter.WriteLine("3");
+                var (d, h) = _inputReader.ReadLine().ToInt2();
+
+                var dx =(double) D - d;
+                var dy = (double)H - h;
+                var katamuki = dy / dx;
+                var y = H - (katamuki * D);
+
+                if (y > current)
+                {
+                    current = y;
+                }
             }
-            else if (s.Contains("ZONeZONe"))
-            {
-                _outputWriter.WriteLine("2");
-            }
-            else if (s.Contains("ZONe"))
-            {
-                _outputWriter.WriteLine("1");
-            }
-            else
-            {
-                _outputWriter.WriteLine("0");
-            }
+
+            _outputWriter.WriteLine(current.ToString());
         }
     }
 
