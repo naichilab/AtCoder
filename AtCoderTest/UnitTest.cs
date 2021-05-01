@@ -9,19 +9,17 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-1 10 10
-3 5
+ozRnonnoe
 ",
             @"
-2.857142857142857
+zone
 ")]
         [InlineData(
             @"
-1 10 10
-3 2
+hellospaceRhellospace
 ",
             @"
-0.0
+
 ")]
         [InlineData(
             @"

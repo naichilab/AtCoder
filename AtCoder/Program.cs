@@ -18,24 +18,59 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (N, D, H) = _inputReader.ReadLine().ToInt3();
-            var current = 0d;
-            for (int i = 0; i < N; i++)
+            List<char> T = new List<char>();
+            var S = _inputReader.ReadLine().ToCharArray();
+            bool reverse = false;
+            
+            foreach (var c in S)
             {
-                var (d, h) = _inputReader.ReadLine().ToInt2();
-
-                var dx =(double) D - d;
-                var dy = (double)H - h;
-                var katamuki = dy / dx;
-                var y = H - (katamuki * D);
-
-                if (y > current)
+                if (c == 'R')
                 {
-                    current = y;
+                    reverse = !reverse;
+                }
+                else
+                {
+                    if (!T.Any())
+                    {
+                        T.Add(c);
+                    }
+                    else
+                    {
+                        if (reverse)
+                        {
+                            //最初に追加
+                            if (T.First() == c)
+                            {
+                                //削除
+                                T.RemoveAt(0);
+                            }
+                            else
+                            {
+                                //追加
+                                T.Insert(0, c);
+                            }
+                        }
+                        else
+                        {
+                            //末尾に追加
+                            if (T.Last()==c)
+                            {
+                                //削除
+                                T.RemoveAt(T.Count - 1);
+                            }
+                            else
+                            {
+                                //追加
+                                T.Add(c);
+                            }
+                        }
+                    }
                 }
             }
 
-            _outputWriter.WriteLine(current.ToString());
+            var chars = reverse ? T.ToArray().Reverse().ToArray() : T.ToArray();
+            var s = new string(chars);
+            _outputWriter.WriteLine(s);
         }
     }
 
