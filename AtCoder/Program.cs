@@ -18,59 +18,17 @@ namespace AtCoder
 
         public void Solve()
         {
-            List<char> T = new List<char>();
-            var S = _inputReader.ReadLine().ToCharArray();
-            bool reverse = false;
-            
-            foreach (var c in S)
+            var s = _inputReader.ReadLine();
+            var cnt = 0;
+            while (true )
             {
-                if (c == 'R')
-                {
-                    reverse = !reverse;
-                }
-                else
-                {
-                    if (!T.Any())
-                    {
-                        T.Add(c);
-                    }
-                    else
-                    {
-                        if (reverse)
-                        {
-                            //最初に追加
-                            if (T.First() == c)
-                            {
-                                //削除
-                                T.RemoveAt(0);
-                            }
-                            else
-                            {
-                                //追加
-                                T.Insert(0, c);
-                            }
-                        }
-                        else
-                        {
-                            //末尾に追加
-                            if (T.Last()==c)
-                            {
-                                //削除
-                                T.RemoveAt(T.Count - 1);
-                            }
-                            else
-                            {
-                                //追加
-                                T.Add(c);
-                            }
-                        }
-                    }
-                }
+                var x = s.IndexOf("ZONe");
+                if (x == -1) break;
+                s = s.Remove(x, 4);
+                cnt++;
             }
 
-            var chars = reverse ? T.ToArray().Reverse().ToArray() : T.ToArray();
-            var s = new string(chars);
-            _outputWriter.WriteLine(s);
+            _outputWriter.WriteLine(cnt.ToString());
         }
     }
 

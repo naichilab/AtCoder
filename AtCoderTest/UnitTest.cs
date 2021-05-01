@@ -9,29 +9,24 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-ozRnonnoe
+abcdZONefghi
 ",
             @"
-zone
+1
 ")]
         [InlineData(
             @"
-hellospaceRhellospace
+ZONeZONeZONe
 ",
             @"
-
+3
 ")]
         [InlineData(
             @"
-5 896 483
-228 59
-529 310
-339 60
-78 266
-659 391
+helloAtZoner
 ",
             @"
-245.3080684596577
+0
 ")]
      
         public void Test(string inputLines, string expectOutputLines)
