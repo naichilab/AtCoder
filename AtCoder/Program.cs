@@ -18,9 +18,21 @@ namespace AtCoder
 
         public void Solve()
         {
-            var N = _inputReader.ReadLine().ToInt();
-            var x = ((N - 1) / 100) + 1;
-            _outputWriter.WriteLine(x.ToString());
+            var (N1, K) = _inputReader.ReadLine().ToInt2();
+            long N = N1;
+            for (int i = 0; i < K; i++)
+            {
+                if (N % 200 == 0)
+                {
+                    N = N / 200;
+                }
+                else
+                {
+                    N = long.Parse(N.ToString() + "200");
+                }
+            }
+
+            _outputWriter.WriteLine(N.ToString());
         }
     }
 

@@ -9,20 +9,27 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-2021
+2021 4
 ",
             @"
-21
+50531
 ")]
         [InlineData(
             @"
-200
+40000 2
 ",
             @"
-2
+1
 ")]
     
-     
+        [InlineData(
+            @"
+8691 20
+",
+            @"
+84875488281
+")]
+
         public void Test(string inputLines, string expectOutputLines)
         {
             var reader = new TestInputReader(inputLines);
