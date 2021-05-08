@@ -9,25 +9,19 @@ namespace AtCoderTest
         [Theory]
         [InlineData(
             @"
-abcdZONefghi
+2021
 ",
             @"
-1
+21
 ")]
         [InlineData(
             @"
-ZONeZONeZONe
+200
 ",
             @"
-3
+2
 ")]
-        [InlineData(
-            @"
-helloAtZoner
-",
-            @"
-0
-")]
+    
      
         public void Test(string inputLines, string expectOutputLines)
         {

@@ -18,17 +18,9 @@ namespace AtCoder
 
         public void Solve()
         {
-            var s = _inputReader.ReadLine();
-            var cnt = 0;
-            while (true )
-            {
-                var x = s.IndexOf("ZONe");
-                if (x == -1) break;
-                s = s.Remove(x, 4);
-                cnt++;
-            }
-
-            _outputWriter.WriteLine(cnt.ToString());
+            var N = _inputReader.ReadLine().ToInt();
+            var x = ((N - 1) / 100) + 1;
+            _outputWriter.WriteLine(x.ToString());
         }
     }
 
