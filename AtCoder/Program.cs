@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text.RegularExpressions;
 
 namespace AtCoder
@@ -18,26 +19,52 @@ namespace AtCoder
 
         public void Solve()
         {
-            var (N1, K) = _inputReader.ReadLine().ToInt2();
-            long N = N1;
-            for (int i = 0; i < K; i++)
+            var N = _inputReader.ReadLine().ToInt();
+            var numbers = _inputReader.ReadLine().ToIntArray();
+            var dict = new Dictionary<int, List<int>>();
+            foreach (var n in numbers)
             {
-                if (N % 200 == 0)
+                var key = n % 200;
+                if (!dict.ContainsKey(key))
                 {
-                    N = N / 200;
+                    dict.Add(key, new List<int>());
                 }
-                else
-                {
-                    N = long.Parse(N.ToString() + "200");
-                }
+
+                dict[key].Add(n);
             }
 
-            _outputWriter.WriteLine(N.ToString());
+            long cnt = 0;
+            foreach (var kvp in dict)
+            {
+                var nums = kvp.Value;
+                var numsCount = nums.Count();
+                cnt += Combination.nCk(numsCount, 2);
+            }
+
+            _outputWriter.WriteLine(cnt.ToString());
         }
     }
 
+
     public static class Combination
     {
+        /// <summary>
+        /// 組み合わせ (n >= k)
+        /// </summary>
+        public static long nCk(long n, long k)
+        {
+            if (n < k) return 0;
+            if (n == k) return 1;
+            long x = 1;
+            for (long i = 0; i < k; i++)
+            {
+                x = x * (n - i) / (i + 1);
+            }
+
+            return x;
+        }
+
+
         public static IEnumerable<T[]> Enumerate<T>(IEnumerable<T> items, int k, bool withRepetition)
         {
             if (k == 1)
